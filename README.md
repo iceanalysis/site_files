@@ -1,2 +1,2 @@
-# site_files
- iceanalysis file home
+# Ice Analysis
+ Exploring ice hockey beyond the box score.
