@@ -72,14 +72,14 @@ paginate = 4 #frontpage pagination
 
 # this will also be in author bio if there is no writer.
   [params.social]
-  facebook      = "full Social profile url in facebook"
-  googleplus    = "full profile url in googleplus"
-  email         = "email@example.com"
+  #facebook      = "full Social profile url in facebook"
+  #googleplus    = "full profile url in googleplus"
+  email         = "iceanalysis@gmail.com"
   twitter       = "https://twitter.com/zcollevechio33"
-  linkedin      = "full profile url in linkedin"
-  stackoverflow = "full profile url in stackoverflow"
-  instagram     = "full profile url in instagram"
-  github        = "full profile url in github"
+  #linkedin      = "full profile url in linkedin"
+  #stackoverflow = "full profile url in stackoverflow"
+  #instagram     = "full profile url in instagram"
+  github        = "https://github.com/iceanalysis"
   rss           = true
 
 # Add a writer, then use it in the markdown front matter like this: writer = "Lukas Herman"
