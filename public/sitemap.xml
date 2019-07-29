@@ -3,138 +3,138 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2017/02/14/this-is-my-slug-please-work/</loc>
+    <loc>/iceanalysis.com/2017/02/14/this-is-my-slug-please-work/</loc>
     <lastmod>2017-02-14T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2016/11/05/this-is-a-standard-post/</loc>
+    <loc>/iceanalysis.com/2016/11/05/this-is-a-standard-post/</loc>
     <lastmod>2016-11-05T19:41:01+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2017/05/05/another-awesome-post/</loc>
+    <loc>/iceanalysis.com/2017/05/05/another-awesome-post/</loc>
     <lastmod>2017-05-05T19:44:32+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2017/11/21/a-post-without-an-image/</loc>
+    <loc>/iceanalysis.com/2017/11/21/a-post-without-an-image/</loc>
     <lastmod>2017-11-21T19:50:47+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2017/12/25/a-totally-response-theme/</loc>
+    <loc>/iceanalysis.com/2017/12/25/a-totally-response-theme/</loc>
     <lastmod>2017-12-25T19:53:42+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2018/01/01/post-with-a-gallery/</loc>
+    <loc>/iceanalysis.com/2018/01/01/post-with-a-gallery/</loc>
     <lastmod>2018-01-01T19:57:40+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2018/02/14/a-post-with-lot-of-comments/</loc>
+    <loc>/iceanalysis.com/2018/02/14/a-post-with-lot-of-comments/</loc>
     <lastmod>2018-02-14T19:59:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2018/05/06/blogging-is-fun-and-worthwhile/</loc>
+    <loc>/iceanalysis.com/2018/05/06/blogging-is-fun-and-worthwhile/</loc>
     <lastmod>2018-05-06T20:02:19+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2018/07/04/item-with-image/</loc>
+    <loc>/iceanalysis.com/2018/07/04/item-with-image/</loc>
     <lastmod>2018-07-04T20:22:08+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2018/09/30/item-with-image/</loc>
+    <loc>/iceanalysis.com/2018/09/30/item-with-image/</loc>
     <lastmod>2018-09-30T20:23:59+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2018-09-30T20:23:59+05:30</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+    <loc>/iceanalysis.com/</loc>
     <lastmod>2018-09-30T20:23:59+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/iceanalysis.com/post/</loc>
+    <lastmod>2018-09-30T20:23:59+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/iceanalysis.com/categories/</loc>
     <lastmod>2017-12-25T19:53:42+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/photography/</loc>
+    <loc>/iceanalysis.com/categories/photography/</loc>
     <lastmod>2017-12-25T19:53:42+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/code/</loc>
+    <loc>/iceanalysis.com/categories/code/</loc>
     <lastmod>2017-11-21T19:50:47+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/travel/</loc>
+    <loc>/iceanalysis.com/categories/travel/</loc>
     <lastmod>2017-05-05T19:44:32+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/design/</loc>
+    <loc>/iceanalysis.com/categories/design/</loc>
     <lastmod>2017-02-14T18:25:22+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/contact/</loc>
+    <loc>/iceanalysis.com/contact/</loc>
     <lastmod>2016-11-06T13:00:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>/iceanalysis.com/about/</loc>
     <lastmod>2016-11-05T21:05:33+05:30</lastmod>
   </url>
   
   <url>
-    <loc>/2015/07/23/hello-r-markdown/</loc>
+    <loc>/iceanalysis.com/2015/07/23/hello-r-markdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r-markdown/</loc>
+    <loc>/iceanalysis.com/categories/r/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>/iceanalysis.com/tags/r-markdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/plot/</loc>
+    <loc>/iceanalysis.com/tags/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/regression/</loc>
+    <loc>/iceanalysis.com/tags/plot/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/iceanalysis.com/tags/regression/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
