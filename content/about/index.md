@@ -1,21 +1,11 @@
 ---
-date: "2016-11-05T21:05:33+05:30"
-title: About me
+date: "2019-07-29"
+title: About
 ---
 
-An sincerity so extremity he additions. Her yet **there truth merit**. Mrs all projecting favourable now unpleasing. Son law garden chatty temper. Oh children provided to mr elegance marriage strongly. Off can admiration prosperous now devonshire diminution law.
+Hi there. This site is a place for me to combine two of my passions: ice hockey and data analysis. I started playing hockey when I was three, and still play to this day at the league where all hockey players end up: beer league. On top of that, I am a USA hockey referee - plenty of skating for me in the fall and winter months. 
 
-Received overcame oh sensible so at an. Formed do change merely to county it. **Am separate contempt** domestic to to oh. On relation my so addition branched. Put hearing cottage she norland letters equally prepare too. Replied exposed savings he no viewing as up. Soon body add him hill. No father living really people estate if. Mistake do produce beloved demesne if am pursuit.
+On the other side, my day job is in the field of data analytics. I love exploring data and uncovering relationships and explanations. One of my favorite parts of the analysis is using data visualizations to tell a story. 
 
-![This is me][1]
+That's it for now. Feel free to drop me an email (in the contact tab) and follow on twitter for updates [@IceAnalysis](https://twitter.com/IceAnalysis)
 
-The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn't listen. She packed her seven versalia, put her initial into the belt and made herself on the way.
-
-#### Education
-
-* Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-* Aliquam tincidunt mauris eu risus.
-
-When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then
-
-[1]: /img/about.jpg
