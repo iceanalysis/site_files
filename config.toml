@@ -1,4 +1,4 @@
-baseurl = "iceanalysis.com/"
+baseurl = "https://iceanalysis.com/"
 title = "Ice Analysis"
 theme = "hugo-nederburg-theme"
 languageCode = "en-us"
