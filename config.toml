@@ -84,15 +84,15 @@ paginate = 4 #frontpage pagination
 
 # Add a writer, then use it in the markdown front matter like this: writer = "Lukas Herman"
   [params.writers]
-      [params.writers."Zackary Collevechio"]
-    link = "https://www.darrycakes.com"
-    email = "zcollevechio@gmail.com"
+      [params.writers."IceAnalysis.com"]
+    link = "https://iceanalysis.com"
+    email = "iceanalysis@gmail.com"
     bio = [
-      "Zackary is so smart and wants to write a blog."
+      "Ice Analysis explores combines ice hockey and data analysis."
     ]
     facebook      = "full lukas profile url in facebook"
     googleplus    = "full profile url in googleplus"
-    twitter       = "www.twitter.com/zcollevechio33"
+    twitter       = "https://twitter.com/zcollevechio33"
     linkedin      = "full profile url in linkedin"
     stackoverflow = "full profile url in stackoverflow"
     instagram     = "full profile url in instagram"
@@ -122,7 +122,7 @@ paginate = 4 #frontpage pagination
     ]
     facebook      = "full Göran profile url in facebook"
     googleplus    = "full profile url in googleplus"
-    twitter       = "www.twitter.com/darrycakes"
+    twitter       = "full profiel url in twitter"
     linkedin      = "full profile url in linkedin"
     stackoverflow = "full profile url in stackoverflow"
     instagram     = "full profile url in instagram"
