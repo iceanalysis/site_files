@@ -25,7 +25,7 @@ paginate = 5 #frontpage pagination
 [params]
   # Unmark to use post folder for images. Default is static folder.
   #usepostimgfolder = true
-  slogan = "Numbers behind the game"
+  slogan = "Ice Hockey & Data Analysis"
   description = "Contextualizing sports using data analysis" # meta description
   # You need to set author to have an author bio. If you have a writer in the markdown file it will override this.
   author = "Zackary Collevechio"
