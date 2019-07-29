@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>travel on Ice Analysis</title>
-    <link>/iceanalysis.com/categories/travel/</link>
+    <link>/categories/travel/</link>
     <description>Recent content in travel on Ice Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 05 May 2017 19:44:32 +0530</lastBuildDate>
     
-	<atom:link href="/iceanalysis.com/categories/travel/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/travel/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Another Awesome Post</title>
-      <link>/iceanalysis.com/2017/05/05/another-awesome-post/</link>
+      <link>/2017/05/05/another-awesome-post/</link>
       <pubDate>Fri, 05 May 2017 19:44:32 +0530</pubDate>
       
-      <guid>/iceanalysis.com/2017/05/05/another-awesome-post/</guid>
+      <guid>/2017/05/05/another-awesome-post/</guid>
       <description>&lt;p&gt;Fifth abundantly made Give sixth hath. Cattle creature i be don&amp;rsquo;t them.&lt;/p&gt;</description>
     </item>
     

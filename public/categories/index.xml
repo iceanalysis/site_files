@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Ice Analysis</title>
-    <link>/iceanalysis.com/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Ice Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Dec 2017 19:53:42 +0530</lastBuildDate>
     
-	<atom:link href="/iceanalysis.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>photography</title>
-      <link>/iceanalysis.com/categories/photography/</link>
+      <link>/categories/photography/</link>
       <pubDate>Mon, 25 Dec 2017 19:53:42 +0530</pubDate>
       
-      <guid>/iceanalysis.com/categories/photography/</guid>
+      <guid>/categories/photography/</guid>
       <description></description>
     </item>
     
     <item>
       <title>code</title>
-      <link>/iceanalysis.com/categories/code/</link>
+      <link>/categories/code/</link>
       <pubDate>Tue, 21 Nov 2017 19:50:47 +0530</pubDate>
       
-      <guid>/iceanalysis.com/categories/code/</guid>
+      <guid>/categories/code/</guid>
       <description></description>
     </item>
     
     <item>
       <title>travel</title>
-      <link>/iceanalysis.com/categories/travel/</link>
+      <link>/categories/travel/</link>
       <pubDate>Fri, 05 May 2017 19:44:32 +0530</pubDate>
       
-      <guid>/iceanalysis.com/categories/travel/</guid>
+      <guid>/categories/travel/</guid>
       <description></description>
     </item>
     
     <item>
       <title>design</title>
-      <link>/iceanalysis.com/categories/design/</link>
+      <link>/categories/design/</link>
       <pubDate>Tue, 14 Feb 2017 18:25:22 +0530</pubDate>
       
-      <guid>/iceanalysis.com/categories/design/</guid>
+      <guid>/categories/design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>/iceanalysis.com/categories/r/</link>
+      <link>/categories/r/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>/iceanalysis.com/categories/r/</guid>
+      <guid>/categories/r/</guid>
       <description></description>
     </item>
     
