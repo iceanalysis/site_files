@@ -1,5 +1,5 @@
 baseurl = "https://iceanalysis.com/"
-title = "ZZ's site"
+title = "Ice Analysis"
 theme = "hugo-nederburg-theme"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
@@ -25,7 +25,7 @@ paginate = 5 #frontpage pagination
 [params]
   # Unmark to use post folder for images. Default is static folder.
   #usepostimgfolder = true
-  slogan = "Sports and Analytics"
+  slogan = "Numbers behind the game"
   description = "Contextualizing sports using data analysis" # meta description
   # You need to set author to have an author bio. If you have a writer in the markdown file it will override this.
   author = "Zackary Collevechio"
