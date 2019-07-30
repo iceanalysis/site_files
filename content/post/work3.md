@@ -1,6 +1,6 @@
 ---
 categories:
-- travel
+- sports
 date: "2017-05-05T19:44:32+05:30"
 draft: false
 image: img/portfolio/bridge1.jpg
