@@ -26,12 +26,12 @@ paginate = 4 #frontpage pagination
   # Unmark to use post folder for images. Default is static folder.
   #usepostimgfolder = true
   slogan = "Ice Hockey & Data Analysis"
-  description = "Contextualizing sports using data analysis" # meta description
+  description = "Contextualizing ice hockey using data analysis" # meta description
   # You need to set author to have an author bio. If you have a writer in the markdown file it will override this.
   author = "IceAnalysis.com"
   authorLink = "https://iceanalysis.com/"
   bio = [
-    "<a href='https://iceanalysis.com/'>Ice Analysis</a>. Contextualizing sports using data analysis."
+    "<a href='https://iceanalysis.com/'>Ice Analysis</a> combines ice hockey and data analysis."
   ]
   copyright = [
     "&copy; 2018 Göran Svensson",
