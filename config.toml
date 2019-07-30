@@ -28,10 +28,10 @@ paginate = 4 #frontpage pagination
   slogan = "Ice Hockey & Data Analysis"
   description = "Contextualizing sports using data analysis" # meta description
   # You need to set author to have an author bio. If you have a writer in the markdown file it will override this.
-  author = "Zackary Collevechio"
-  authorLink = "https://appernetic.io/"
+  author = "IceAnalysis.com"
+  authorLink = "https://iceanalysis.com/"
   bio = [
-    "Göran is an avid blogger and the founder of <a href='https://appernetic.io/'>Appernetic.io</a>. This is the author bio shown after posts."
+    "<a href='https://iceanalysis.com/'>Ice Analysis</a>. Contextualizing sports using data analysis."
   ]
   copyright = [
     "&copy; 2018 Göran Svensson",
@@ -88,7 +88,7 @@ paginate = 4 #frontpage pagination
     link = "https://iceanalysis.com"
     email = "iceanalysis@gmail.com"
     bio = [
-      "Ice Analysis explores combines ice hockey and data analysis."
+      "Ice Analysis combines ice hockey and data analysis."
     ]
     facebook      = "full lukas profile url in facebook"
     googleplus    = "full profile url in googleplus"
