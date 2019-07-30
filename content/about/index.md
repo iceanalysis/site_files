@@ -9,3 +9,4 @@ On the other side, my day job is in the field of data analytics. I love explorin
 
 That's it for now. Feel free to [drop me an email](https://iceanalysis.com/contact) and follow on twitter for updates [@IceAnalysis](https://twitter.com/IceAnalysis)
 
+Important: here's a picture of of a potato.![alt text](/potato.png "It's a potato")
