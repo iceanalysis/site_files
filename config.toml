@@ -52,7 +52,7 @@ paginate = 4 #frontpage pagination
      # - send a dummy email yourself to confirm your account
      # - click the confirm link in the email from www.formspree.io
      # - you're done. Happy mailing!
-  email = "goran@molnsys.com"
+  email = "iceanalysis@gmail.com"
 
   # Nav links in the side bar
   [[menu.main]]
@@ -75,7 +75,7 @@ paginate = 4 #frontpage pagination
   #facebook      = "full Social profile url in facebook"
   #googleplus    = "full profile url in googleplus"
   email         = "iceanalysis@gmail.com"
-  twitter       = "https://twitter.com/zcollevechio33"
+  twitter       = "https://twitter.com/iceanalysis"
   #linkedin      = "full profile url in linkedin"
   #stackoverflow = "full profile url in stackoverflow"
   #instagram     = "full profile url in instagram"
@@ -92,7 +92,7 @@ paginate = 4 #frontpage pagination
     ]
     facebook      = "full lukas profile url in facebook"
     googleplus    = "full profile url in googleplus"
-    twitter       = "https://twitter.com/zcollevechio33"
+    twitter       = "https://twitter.com/iceanalysis"
     linkedin      = "full profile url in linkedin"
     stackoverflow = "full profile url in stackoverflow"
     instagram     = "full profile url in instagram"

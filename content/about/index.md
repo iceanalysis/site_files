@@ -7,5 +7,5 @@ Hi there. This site is a place for me to combine two of my passions: ice hockey 
 
 On the other side, my day job is in the field of data analytics. I love exploring data and uncovering relationships and explanations. One of my favorite parts of the analysis is using data visualizations to tell a story. 
 
-That's it for now. Feel free to drop me an email (in the contact tab) and follow on twitter for updates [@IceAnalysis](https://twitter.com/IceAnalysis)
+That's it for now. Feel free to [drop me an email](https://iceanalysis.com/contact) and follow on twitter for updates [@IceAnalysis](https://twitter.com/IceAnalysis)
 
