@@ -20,7 +20,7 @@ paginate = 4 #frontpage pagination
     useSessionStorage = false
 
 [permalinks]
-    post = "/:year/:month/:day/:slug/"    
+    post = "/:slug/"    
 
 [params]
   # Unmark to use post folder for images. Default is static folder.
