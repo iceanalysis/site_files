@@ -6,7 +6,7 @@
     <description>Recent content on Ice Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -102,6 +102,19 @@
     </item>
     
     <item>
+      <title>Overtime? I&#39;ll Start Trying Now</title>
+      <link>/2019/07/30/overtime-hero/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/30/overtime-hero/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;em&gt;Which players turn it on more in overtime?&lt;/em&gt;
+</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
@@ -120,16 +133,6 @@ On the other side, my day job is in the field of data analytics.</description>
       <description>R MarkdownThis is an R Markdown document. And this is me editing the Rmarkdown. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:
 summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.</description>
-    </item>
-    
-    <item>
-      <title>OT Analysis</title>
-      <link>/1/01/01/ot-analysis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/01/01/ot-analysis/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</description>
     </item>
     
   </channel>

@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Ice Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>3v3</title>
+      <link>/tags/3v3/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/3v3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Overtime</title>
+      <link>/tags/overtime/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/overtime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>XG</title>
+      <link>/tags/xg/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/xg/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>R Markdown</title>
@@ -35,33 +62,6 @@
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
       <guid>/tags/regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>3v3</title>
-      <link>/tags/3v3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/3v3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Overtime</title>
-      <link>/tags/overtime/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/overtime/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>XG</title>
-      <link>/tags/xg/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/xg/</guid>
       <description></description>
     </item>
     

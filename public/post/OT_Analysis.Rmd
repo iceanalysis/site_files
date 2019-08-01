@@ -1,32 +1,184 @@
 ---
-title: "OT Analysis"
+title: "Overtime? I'll Start Trying Now"
 author: "IceAnalysis.com"
-date: "7/29/2019"
-categories: ["NHL"]
+image: img/claude_ot.jpg
+image_caption: "test"
+date: "2019-07-30"
+categories: ["All", "NHL"]
 tags: ["Overtime", "3v3", "XG"]
+slug: "Overtime-Hero"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(here)
+library(ggrepel)
+library(extrafont)
+loadfonts(device = "win")
+#Gadugi
+theme_ice <- theme_bw() +
+  theme(
+    text = element_text(family = "Consolas"),
+    plot.title = element_text(hjust = .5),
+    plot.subtitle = element_text(hjust = .5),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom")
+
+
+tvt <- read.csv(here("data", "3v3_last_3_years_corsica.csv"), stringsAsFactors = F)
+fvf <- read.csv(here("data", "5v5_last_3_years_corsica.csv"), stringsAsFactors = F)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+*Which players turn it on more in overtime?*
+<!--more-->
+*Photo: (Eric Hartline/USA Today Images)*
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Who do you think is the best overtime player in the NHL? Someone who turns it on when it matters most, having the offensive creativity in open space and the defensive skill to shut down the other teams' best players. You're probably thinking of the obvious, great two-way centers: Connor McDavid, Sidney Crosby, Jay Beagle.[^1] And you'd probably be right. Those players dominate many statistical categories and you'll be hard pressed to find someone who wouldn't want them out there for their team in overtime.
 
-```{r cars}
-summary(cars)
+\newline
+
+However, we are not looking at those players here. We're looking for players that have average to below-average metrics during 5-on-5 play, but seem to kick it into an extra gear once the OT period starts. Before we go further, try to think of the one forward and one defenseman in the league that fit this description best. Got it? Let's go.
+
+### Expected Goals (XG)
+> Feel free to skim this section if you're familiar with XG.
+
+The metric we're going to use to measure players here is expected goals. There are many different models that calculate expected goals, but we will be using [evolving-hockey's](https://evolving-hockey.com). Expected goals is a metric that attempts to quantify how many goals were *expected* to be scored off of shots after accounting for the location of the shot. This can be easily understood since intuitively we know that some shots have a better chance at becoming goals than others. For example, a wrister from the low slot would be expected to go in more often than a slap shot from the blue line.[^2] If we assign a probability to every shot, we can then add these probabilities together to see the total number of goals we *expected* to see. 
+\newline
+In terms of player evaluation, we can look at only those shots that were taken while a specific player was on the ice and calculate how many goals the team was expected to score/concede while this player on the ice. A popular way to express XG is as a percentage; if a player has an XG% of 50%, they give up the exact same amount of expected goals as they generate.
+
+> Higher XG% means more scoring chance creation.
+
+If you're still a bit skeptical of the metric, take a look at how well expected goals scored correlates with actual goals scored.[^3]
+
+
+
+
+```{r, echo = F, warning=F}
+
+
+fvf %>%
+  filter(TOI > 100) %>%
+  ggplot(aes(x = xGF, y = GF)) +
+  geom_point(color = "darkblue", alpha = .25) +
+  geom_abline(color = "red", size = 1.5) +
+  theme_ice +
+  labs(title = "5v5 Goals versus Expected Goals",
+       subtitle = "2016-2019",
+       x = "Expected Goals",
+       y = "Goals")
+
+
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+If the metric was 100% accurate all of the points would fall on the red line. Obviously some players score more than expected and some score less, but the overall trend follows the line well enough.
+
+
+### Hero Hunting
+
+Great, now that we know what XG is, we can just sort all the players and see who the best overtime player is, right? Wrong. Our goal is to find players who are nothing spectacular when it comes to even strength play, but excel in the overtime period. One way to analyze this is to compare every players' 5v5 XG% to their 3v3 XG%. Below is the distribution of 5v5 and 3v3 XG% for all players (with a minimum TOI threshold).
+
+```{r, echo = F, warning=F}
+
+fives <- fvf %>%
+  filter(TOI > 60) %>%
+  select(Player,
+         Team,
+         Season,
+         xGF,
+         xGA) %>%
+  mutate(fvf_xg_pct = xGF / (xGF + xGA)) %>%
+  select(Player, Team, Season, fvf_xg_pct)
+
+threes <- tvt %>%
+  filter(TOI > 5) %>%
+  select(Player,
+         Team,
+         Season,
+         xGF,
+         xGA) %>%
+  mutate(tvt_xg_pct = xGF / (xGF + xGA)) %>%
+  select(Player, Team, Season, tvt_xg_pct)
+
+
+
+
+
+
+joined_df <- left_join(threes, fives, by = c("Player", "Team", "Season"))
+
+joined_df %>%
+  ggplot(aes(x = fvf_xg_pct, y = tvt_xg_pct)) +
+  geom_point(color = "darkblue", alpha = .25) +
+  facet_wrap(~Season) +
+  geom_hline(yintercept = .5) +
+  geom_vline(xintercept = .5) +
+  theme_ice +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  theme(panel.grid = element_blank()) +
+  labs(title = "XG Percentage: 5-on-5 versus 3-on-3",
+       x = "5-on-5 XG%",
+       y = "3-on-3 XG")
+
+
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+In each of the three panels above, the players can fall into one of four quadrants:
+
+1. Top right: Stronger 5v5 metrics and stronger 3v3 metrics. The great players we are ignoring in this analysis.
+2. Bottom right: Stronger 5v5 metrics, weaker 3v3 metrics. The opposite of what we are looking for.[^4]
+3. Bottom left: Weaker at both 5v5 and 3v3. "But he's great in the locker room."
+4. Top left: Weaker 5v5 metrics, stronger 3v3 metrics. **Our overtime heroes.**
+
+### The Big Reveal
+
+
+Out of the 418 players to appear in at least five minutes of 3v3 hockey and sixty minutes of 5v5 hockey, 278 have never qualified as a hero, 104 have fell in the category in only one year, and 31 have been there twice. Only two players have managed to appear in the top left quadrant all three years and claim the (co-) title of overtime hero.
+
+```{r, echo = F, warning=F}
+
+hero_df <- joined_df %>%
+  filter(Player == "Mike Hoffman" | Player == "Erik Johnson")
+
+
+  ggplot(joined_df, aes(x = fvf_xg_pct, y = tvt_xg_pct)) +
+  geom_point(color = "gray", alpha = .25) +
+  geom_hline(yintercept = .5) +
+  geom_vline(xintercept = .5) +
+  geom_point(data = hero_df, aes(color = Player), size = 2.5, show.legend = T) +
+  scale_color_manual(values = c("red", "darkblue", "gray")) +
+  facet_wrap(~Season) +
+  theme_ice +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  theme(panel.grid = element_blank()) +
+  labs(title = "XG Percentage: 5-on-5 versus 3-on-3",
+       x = "5-on-5 XG%",
+       y = "3-on-3 XG")
+```
+
+Erik Johnson and Mike Hoffman: they may not be the best in the first sixty minutes, but they turn it on when it counts.
+
+
+
+
+
+
+[^1]: It's a joke, guys
+[^2]: Maybe someone should relay this information to Radko Gudas
+[^3]: For the most detailed breakdown of XG, see [this post by Evolving Wild](https://rpubs.com/evolvingwild/395136/)
+[^4]: Fun fact: there was only one player who fell in this quadrant in all three years: Mark Stone
+
+
+
+
+
+
+

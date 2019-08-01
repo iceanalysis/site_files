@@ -1,29 +1,61 @@
 ---
-title: "OT Analysis"
+title: "Overtime? I'll Start Trying Now"
 author: "IceAnalysis.com"
-date: "7/29/2019"
-categories: ["NHL"]
+image: img/claude_ot.jpg
+image_caption: "test"
+date: "2019-07-30"
+categories: ["All", "NHL"]
 tags: ["Overtime", "3v3", "XG"]
+slug: "Overtime-Hero"
 ---
 
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<p><em>Which players turn it on more in overtime?</em>
+<!--more-->
+<em>Photo: (Eric Hartline/USA Today Images)</em></p>
+<p>Who do you think is the best overtime player in the NHL? Someone who turns it on when it matters most, having the offensive creativity in open space and the defensive skill to shut down the other teams’ best players. You’re probably thinking of the obvious, great two-way centers: Connor McDavid, Sidney Crosby, Jay Beagle.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> And you’d probably be right. Those players dominate many statistical categories and you’ll be hard pressed to find someone who wouldn’t want them out there for their team in overtime.</p>
+
+<p>However, we are not looking at those players here. We’re looking for players that have average to below-average metrics during 5-on-5 play, but seem to kick it into an extra gear once the OT period starts. Before we go further, try to think of the one forward and one defenseman in the league that fit this description best. Got it? Let’s go.</p>
+<div id="expected-goals-xg" class="section level3">
+<h3>Expected Goals (XG)</h3>
+<blockquote>
+<p>Feel free to skim this section if you’re familiar with XG.</p>
+</blockquote>
+<p>The metric we’re going to use to measure players here is expected goals. There are many different models that calculate expected goals, but we will be using <a href="https://evolving-hockey.com">evolving-hockey’s</a>. Expected goals is a metric that attempts to quantify how many goals were <em>expected</em> to be scored off of shots after accounting for the location of the shot. This can be easily understood since intuitively we know that some shots have a better chance at becoming goals than others. For example, a wrister from the low slot would be expected to go in more often than a slap shot from the blue line.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> If we assign a probability to every shot, we can then add these probabilities together to see the total number of goals we <em>expected</em> to see.
+
+In terms of player evaluation, we can look at only those shots that were taken while a specific player was on the ice and calculate how many goals the team was expected to score/concede while this player on the ice. A popular way to express XG is as a percentage; if a player has an XG% of 50%, they give up the exact same amount of expected goals as they generate.</p>
+<blockquote>
+<p>Higher XG% means more scoring chance creation.</p>
+</blockquote>
+<p>If you’re still a bit skeptical of the metric, take a look at how well expected goals scored correlates with actual goals scored.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p><img src="/post/OT_Analysis_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>If the metric was 100% accurate all of the points would fall on the red line. Obviously some players score more than expected and some score less, but the overall trend follows the line well enough.</p>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="/post/OT_Analysis_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<div id="hero-hunting" class="section level3">
+<h3>Hero Hunting</h3>
+<p>Great, now that we know what XG is, we can just sort all the players and see who the best overtime player is, right? Wrong. Our goal is to find players who are nothing spectacular when it comes to even strength play, but excel in the overtime period. One way to analyze this is to compare every players’ 5v5 XG% to their 3v3 XG%. Below is the distribution of 5v5 and 3v3 XG% for all players (with a minimum TOI threshold).</p>
+<p><img src="/post/OT_Analysis_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>In each of the three panels above, the players can fall into one of four quadrants:</p>
+<ol style="list-style-type: decimal">
+<li>Top right: Stronger 5v5 metrics and stronger 3v3 metrics. The great players we are ignoring in this analysis.</li>
+<li>Bottom right: Stronger 5v5 metrics, weaker 3v3 metrics. The opposite of what we are looking for.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></li>
+<li>Bottom left: Weaker at both 5v5 and 3v3. “But he’s great in the locker room.”</li>
+<li>Top left: Weaker 5v5 metrics, stronger 3v3 metrics. <strong>Our overtime heroes.</strong></li>
+</ol>
+</div>
+<div id="the-big-reveal" class="section level3">
+<h3>The Big Reveal</h3>
+<p>Out of the 418 players to appear in at least five minutes of 3v3 hockey and sixty minutes of 5v5 hockey, 278 have never qualified as a hero, 104 have fell in the category in only one year, and 31 have been there twice. Only two players have managed to appear in the top left quadrant all three years and claim the (co-) title of overtime hero.</p>
+<p><img src="/post/OT_Analysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Erik Johnson and Mike Hoffman: they may not be the best in the first sixty minutes, but they turn it on when it counts.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It’s a joke, guys<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Maybe someone should relay this information to Radko Gudas<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>For the most detailed breakdown of XG, see <a href="https://rpubs.com/evolvingwild/395136/">this post by Evolving Wild</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Fun fact: there was only one player who fell in this quadrant in all three years: Mark Stone<a href="#fnref4" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
