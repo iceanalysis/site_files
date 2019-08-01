@@ -12,65 +12,11 @@
     
     
     <item>
-      <title>All</title>
-      <link>/categories/all/</link>
-      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/all/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>NHL</title>
       <link>/categories/nhl/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/nhl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>photography</title>
-      <link>/categories/photography/</link>
-      <pubDate>Mon, 25 Dec 2017 19:53:42 +0530</pubDate>
-      
-      <guid>/categories/photography/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>code</title>
-      <link>/categories/code/</link>
-      <pubDate>Tue, 21 Nov 2017 19:50:47 +0530</pubDate>
-      
-      <guid>/categories/code/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sports</title>
-      <link>/categories/sports/</link>
-      <pubDate>Fri, 05 May 2017 19:44:32 +0530</pubDate>
-      
-      <guid>/categories/sports/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>design</title>
-      <link>/categories/design/</link>
-      <pubDate>Tue, 14 Feb 2017 18:25:22 +0530</pubDate>
-      
-      <guid>/categories/design/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/categories/r/</guid>
       <description></description>
     </item>
     
