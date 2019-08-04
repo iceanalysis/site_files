@@ -122,7 +122,7 @@ joined_df %>%
   theme(panel.grid = element_blank()) +
   labs(title = "XG Percentage: 5-on-5 versus 3-on-3",
        x = "5-on-5 XG%",
-       y = "3-on-3 XG")
+       y = "3-on-3 XG%")
 
 
 
@@ -161,7 +161,7 @@ hero_df <- joined_df %>%
   theme(panel.grid = element_blank()) +
   labs(title = "XG Percentage: 5-on-5 versus 3-on-3",
        x = "5-on-5 XG%",
-       y = "3-on-3 XG")
+       y = "3-on-3 XG%")
 ```
 
 Erik Johnson and Mike Hoffman: they may not be the best in the first sixty minutes, but they turn it on when it counts.
