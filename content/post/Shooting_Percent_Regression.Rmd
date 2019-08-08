@@ -62,16 +62,14 @@ sh_df <- skaters %>%
 ```
 
 
-*Regression to the mean* is something you hear in stats 101 class`. It's also something hockey nerds seem to always clamor about when a player has a good season. What do they mean by this, and how correct is the notion that a player will "regress to the mean?"
+
+## Luck or Math?
+
+Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team's goalie play like Martin Brodeur reincarnated? Then the other team limps down the ice, gets one or two shots on net, and of course one scores a goal.[^1] Some may refer to this as bad **puck luck.**  The tricky thing about puck luck is that it is impossible to sustain, meaning that a change in luck is always just around the corner. This is an example of what stats nerds refer to as *regression to the mean.*  
 
 
-## Meaning
 
-To put it simply, regression in the context of hockey is usually the idea that when a player has a season in which he produces at a high level, there may be some favorable percentages working in his favor that are not at all related to skill. There are of course many factors that can influence a player's production; natural skill development, better teammates, more favorable deployment, and even a change in mindset or confidence plus many more. 
-
-\newline
-
-However, there are also factors that the player has little control over. You might know it as **puck luck**. Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team's goalie play like Martin Brodeur reincarnated? Then, it's inevitable the other team limps down the ice, gets one or two shots on net, and of course one goes in.[^1] That's bad puck luck, and the idea is that these percentage-based events will mostly even themselves out, so if a player experiences an unusually lucky season they are unlikely to repeat it the following year.
+To put it simply, regression in the context of hockey is the idea that when a player has a season in which he produces at a high level, there may be some percentages working in his favor that are not at all related to his skill. There are of course many factors that can influence a player's production; natural skill development, better teammates, more favorable deployment, and even a change in mindset or confidence plus many more. However, there are also factors that the player has little control over, and the idea is that these percentage-based events will mostly even themselves out over time. So, if a player experiences an unusual amount of good puck luck within a season they are unlikely to repeat their performance in the following year.
 
 *All data comes from [evolving-hockey.com](https://evolving-hockey.com/)*
 
