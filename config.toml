@@ -31,7 +31,7 @@ paginate = 4 #frontpage pagination
   author = "IceAnalysis.com"
   authorLink = "https://iceanalysis.com/"
   bio = [
-    "<a href='https://iceanalysis.com/'>Ice Analysis</a> combines ice hockey and data analysis."
+    "<a href='https://iceanalysis.com/'>Ice Analysis</a> Beyond the Box Score."
   ]
   copyright = [
     "&copy; 2018 Göran Svensson",
