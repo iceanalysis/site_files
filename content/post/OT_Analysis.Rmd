@@ -25,6 +25,9 @@ theme_ice <- theme_bw() +
     panel.grid.minor = element_blank(),
     legend.position = "bottom")
 
+my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
+
+
 
 tvt <- read.csv(here("data", "3v3_last_3_years_corsica.csv"), stringsAsFactors = F)
 fvf <- read.csv(here("data", "5v5_last_3_years_corsica.csv"), stringsAsFactors = F)
@@ -67,7 +70,8 @@ fvf %>%
   labs(title = "5v5 Goals versus Expected Goals",
        subtitle = "2016-2019",
        x = "Expected Goals",
-       y = "Goals")
+       y = "Goals") +
+  my_labs
 
 
 ```
@@ -122,7 +126,8 @@ joined_df %>%
   theme(panel.grid = element_blank()) +
   labs(title = "XG Percentage: 5-on-5 versus 3-on-3",
        x = "5-on-5 XG%",
-       y = "3-on-3 XG%")
+       y = "3-on-3 XG%") +
+  my_labs
 
 
 
@@ -161,7 +166,8 @@ hero_df <- joined_df %>%
   theme(panel.grid = element_blank()) +
   labs(title = "XG Percentage: 5-on-5 versus 3-on-3",
        x = "5-on-5 XG%",
-       y = "3-on-3 XG%")
+       y = "3-on-3 XG%") +
+    my_labs
 ```
 
 Erik Johnson and Mike Hoffman: they may not be the best in the first sixty minutes, but they turn it on when it counts.

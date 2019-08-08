@@ -13,58 +13,42 @@ slug: "Shooting Percentage Puck Luck"
 <p><em>What goes up, must come down (and vice versa)</em>
 <!--more-->
 <em>Photo: (Brad Mills | USA TODAY Sports)</em></p>
-<p><em>Regression to the mean</em> is something you hear in stats 101 class, (ok maybe 102). It’s also something hockey nerds seem to always clamor about when a player has a good season. What do they mean by this, and how correct is the notion that a player will “regress to the mean?”</p>
+<p><em>Regression to the mean</em> is something you hear in stats 101 class`. It’s also something hockey nerds seem to always clamor about when a player has a good season. What do they mean by this, and how correct is the notion that a player will “regress to the mean?”</p>
 <div id="meaning" class="section level2">
 <h2>Meaning</h2>
-<p>To put it simply, regression in the context of hockey is the idea that when a player has a season in which he produces at a high level, there may be some favorable percentages working in his favor that are not at all related to skill. There are of course many factors that can influence a player’s production; natural skill development, better teammates, more favorable deployment, and even a change in mindset or confidence plus many more.</p>
+<p>To put it simply, regression in the context of hockey is usually the idea that when a player has a season in which he produces at a high level, there may be some favorable percentages working in his favor that are not at all related to skill. There are of course many factors that can influence a player’s production; natural skill development, better teammates, more favorable deployment, and even a change in mindset or confidence plus many more.</p>
 
-<p>However, there are also major factors that the player has little control over. You might know it as <strong>puck luck</strong>. Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team’s goalie play like Martin Brodeur reincarnated? Then there’s the inevitability that the other team limps down the ice, gets one or two shots on net, and of course one goes in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> That’s bad puck luck, and the idea is that these percentage-based events will mostly even themselves out, so if a player experiences an unusually lucky season they are likely about to run out of luck soon.</p>
+<p>However, there are also factors that the player has little control over. You might know it as <strong>puck luck</strong>. Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team’s goalie play like Martin Brodeur reincarnated? Then, it’s inevitable the other team limps down the ice, gets one or two shots on net, and of course one goes in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> That’s bad puck luck, and the idea is that these percentage-based events will mostly even themselves out, so if a player experiences an unusually lucky season they are unlikely to repeat it the following year.</p>
 </div>
-<div id="chart-time" class="section level2">
-<h2>Chart Time</h2>
-<p>One of the easiest percentages to examine is shooting percentage (sh%). A player’s sh% is the percent of shots on net that end up being goals out of all shots on net they take. While there is definitely a skill component to sh%, (i.e.- players can sustain a higher/lower shooting percentage over their careers) year-to-year fluctuations are a glaring sign of puck luck.</p>
+<div id="a-case-study" class="section level2">
+<h2>A Case Study</h2>
+<p>One of the easiest percentages to examine is shooting percentage (sh%). A player’s sh% is the percent of shots that end up being goals out of all shots on net he takes. While there is definitely a skill component to sh%, (i.e.- players can sustain a higher/lower shooting percentage over their careers) a year-to-year fluctuation is a glaring sign of puck luck.</p>
 
-<p>Let’s use Kyle Turris as an example. Turris began his career with the Coyotes, then was traded to Ottawa in 2011 where he remained until the 2017-2018 season. His career sh% was about 10% and he scored about .23 goals per game. In the 2016-2017 season, he had a sh% of 14.6 (a 46% increase over his average) and scored .35 goals per game (a 52% increase over his average). Skeptical observers may have exclaimed <strong>regression!</strong>, but the Nashville Predators were not skeptical observers. This happened to be the last year of Turris’s contract, and Nashville traded for him then promptly gave him a contract worth 71% more than his previous one. Here’s what his sh% has looked like since:</p>
+<p>Let’s use Kyle Turris as an example. Turris began his career with the Coyotes, was traded to Ottawa in 2011, and remained there until the 2017-2018 season. His career sh% until then was about 10%. In the 2016-2017 season, he had a sh% of 14.6% (a 46% increase over his career average) and piled up a career high 27 goals. Skeptical observers may have exclaimed <strong>regression!</strong>, but the Nashville Predators were not skeptical observers. That season also happened to be the last year of Turris’s contract, and Nashville traded for him and promptly gave him a hefty raise to go along with a six year contract. Here’s what his sh% has looked like since:</p>
 <p><img src="/post/Shooting_Percent_Regression_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>He has not been ideal in Nashville, as his sh% and goals per game declined every year.</p>
+<p>He has not been ideal in Nashville, as his sh% and goal totals declined every year.</p>
 </div>
 <div id="players-due-for-regression-in-2019-20" class="section level2">
 <h2>Players Due for Regression in 2019-20</h2>
-<p>Now that we are aware of the dangers of an unsustainable sh%, who should might be due for some bad puck luck this upcoming season? Below are the four players from last season who had the biggest difference between their 2018-19 shooting percentage and their career average.</p>
-<pre><code>## # A tibble: 4 x 5
-##   player            Sh_perc sh_avg  sh_z seasons
-##   &lt;chr&gt;               &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;
-## 1 TRAVIS.ZAJAC        0.158 0.108   2.11      12
-## 2 MATT.DUCHENE        0.180 0.129   2.08      10
-## 3 JAKOB.SILFVERBERG   0.147 0.0943  2.05       7
-## 4 CASEY.CIZIKAS       0.180 0.111   1.98       7</code></pre>
-<p><img src="/post/Shooting_Percent_Regression_files/figure-html/unnamed-chunk-2-1.png" width="576" /></p>
+<p>Now that we are aware of the dangers of an unsustainable sh%, who might be due for some bad puck luck this upcoming season? Below are the four players from last season who had the biggest difference between their 2018-19 shooting percentage and their career average.</p>
+<p><img src="/post/Shooting_Percent_Regression_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
 <p>These four players all had highly unusual shooting percentages. The one that stands out the most to me is Casey Cizikas. After hovering around 9.5% for four straight years, he scored on 18% of his shots this year.<br />
 Another interesting name here: Matt Duchene. Duchene happened to be in the final year of his contract this past year and put up the highest shooting percentage of his career. Guess which team signed him to a huge contract? That’s right, the Nashville Predators. Fool me once…</p>
 </div>
 <div id="a-pleasant-plot-twist" class="section level2">
 <h2>A Pleasant Plot Twist</h2>
-<p>Remember everything from above where we predicted everyone to have a worse season? Well it turns out that regression works in both directions, meaning players who had <em>unlucky</em> seasons can regress to the mean in a <em>positive</em> way. These are players who are due for more bounces to go their way, and that usually means a higher shooting percentage. Here are the four players from this past season who can expect a bouceback.</p>
-<pre><code>## # A tibble: 4 x 5
-##   player         Sh_perc sh_avg  sh_z seasons
-##   &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;
-## 1 TOBIAS.RIEDER   0      0.0703 -1.65       5
-## 2 JADEN.SCHWARTZ  0.0601 0.124  -1.97       7
-## 3 RYAN.KESLER     0.0581 0.113  -2.18      12
-## 4 JAMES.NEAL      0.0496 0.116  -2.46      11</code></pre>
-<p><img src="/post/Shooting_Percent_Regression_files/figure-html/unnamed-chunk-3-1.png" width="576" /></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Tobias Rieder (EDM): Rieder scored 0 goals but somehow that wasn’t the most unusual percentage (in terms of z-score). Will he repeat that performance this year? (Hint: no)<br />
-</li>
-<li>Jaden Schwartz (STL): Ah yes, the Blues are definitely the team in need of more bounces.<br />
-</li>
-<li>Ryan Kesler (ANA): Hampered by injuries, he will not get a chance to bounce back as he will remain on LTIR this upcoming season.</li>
-<li>James Neal (The Real Deal): The player who is most due for puck luck. Neal’s 18-19 shooting percentage was <strong>2.46</strong> standard deviations below his career average, which has spanned 11 seasons. He will start his redemption tour on a new team after being acquired by Edmonton after spending one season in Calgary. Will Edmonton actually be on the winning end of a <a href="https://twitter.com/TSNBobMcKenzie/status/748238297273610240">1 for 1 trade?</a></li>
-</ol>
+<p>Remember everything from above where we predicted everyone to have worse seasons? Well it turns out that regression works in both directions, meaning players who had <em>unlucky</em> seasons can regress to the mean in a <em>positive</em> way. These are players who are due for more bounces to go their way, and that usually means a higher shooting percentage. Here are four players from this past season who are likely to have more luck in the upcoming season.</p>
+<p><img src="/post/Shooting_Percent_Regression_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
+<ul>
+<li><p>David Backes (BOS): A 35 year old veteran player with a rich cap hit, Backes has seen his sh% decline for the fifth straight year. After being a healthy scratch during Boston’s playoff run, many people wonder how much he has left.</p></li>
+<li><p>Tobias Rieder (EDM): Rieder scored 0 goals but somehow that wasn’t the most outlandish shooting percentage (in terms of z-score). Will he repeat that performance this year? (Hint: no)</p></li>
+<li><p>Jaden Schwartz (STL): Ah yes, the Blues are definitely the team in need of more bounces to go their way.</p></li>
+<li><p>James Neal (The Real Deal): The player who is most due for puck luck. Neal’s 18-19 shooting percentage was <strong>2.46</strong> standard deviations below his career average. He will start his redemption tour on a new team after being acquired by Edmonton after spending one season in Calgary. Will Edmonton actually be on the winning end of a <a href="https://twitter.com/TSNBobMcKenzie/status/748238297273610240">1 for 1 trade?</a></p></li>
+</ul>
 </div>
 <div id="closing-thoughts" class="section level2">
 <h2>Closing Thoughts</h2>
-<p>If you made it through, I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a ‘career year’ or is one game away from being run out of town, make sure they aren’t doing on the back of unsustainable percentages.</p>
+<p>If you made it to the end, I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a ‘career year’ or is one game away from being run out of town, check the percentages.</p>
 </div>
 <div class="footnotes">
 <hr />
