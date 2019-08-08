@@ -1,0 +1,12 @@
+---
+title: TBD
+author: Zackary Collevechio
+date: '2019-08-06'
+slug: tbd
+categories:
+  - NHL
+tags:
+  - Shooting percentage
+  - regression
+  - bounce back
+---

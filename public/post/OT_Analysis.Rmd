@@ -33,7 +33,7 @@ fvf <- read.csv(here("data", "5v5_last_3_years_corsica.csv"), stringsAsFactors =
 
 *Which players turn it on more in overtime?*
 <!--more-->
-*Photo: (Eric Hartline/USA Today Images)*
+*Photo: (Eric Hartline | USA Today Images)*
 
 Who do you think is the best overtime player in the NHL? Someone who turns it on when it matters most, having the offensive creativity in open space and the defensive skill to shut down the other teams' best players. You're probably thinking of the obvious, great two-way centers: Connor McDavid, Sidney Crosby, Jay Beagle.[^1] And you'd probably be right. Those players dominate many statistical categories and you'll be hard pressed to find someone who wouldn't want them out there for their team in overtime.
 

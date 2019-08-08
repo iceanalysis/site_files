@@ -1,0 +1,179 @@
+---
+title: "Shooting Percentages & Puck Luck"
+author: "IceAnalysis.com"
+image: img/trotz.jpg
+date: "2019-08-07"
+categories: ["NHL"]
+tags: ["Shooting Percentage", "Regression"]
+slug: "Shooting Percentage Puck Luck"
+---
+*What goes up, must come down (and vice versa)*
+<!--more-->
+*Photo: (Brad Mills | USA TODAY Sports)*
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(ggrepel)
+library(extrafont)
+loadfonts(device = "win")
+
+theme_ice <- theme_bw() +
+  theme(
+    text = element_text(family = "Consolas"),
+    plot.title = element_text(hjust = .5),
+    plot.subtitle = element_text(hjust = .5),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom")
+
+
+skaters <- read.csv(here("data", "EH_all_years_forwards.csv"), stringsAsFactors = F)
+
+
+sh_df <- skaters %>%
+  select(player,
+         season,
+         Team,
+         GP,
+         TOI,
+         iSF,
+         G,
+         Sh_perc) %>%
+  filter(TOI > 200) %>%
+  group_by(player, season) %>%
+  summarize(TOI = sum(TOI),
+            GP = sum(GP),
+            iSF = sum(iSF),
+            team = toString(Team),
+            G = sum(G),
+            Sh_perc = G / iSF) %>%
+  mutate(seasons = n()) %>%
+  filter(seasons > 3) %>%
+  mutate(sh_avg = mean(Sh_perc),
+         sh_sd =  sd(Sh_perc),
+         sh_z = (Sh_perc - sh_avg) / sh_sd,
+         gpg = round(G / GP,2)) %>%
+  arrange(desc(sh_z)) %>%
+  mutate(season = as.character(season))
+```
+
+
+*Regression to the mean* is something you hear in stats 101 class, (ok maybe 102). It's also something hockey nerds seem to always clamor about when a player has a good season. What do they mean by this, and how correct is the notion that a player will "regress to the mean?"
+
+
+## Meaning
+
+To put it simply, regression in the context of hockey is the idea that when a player has a season in which he produces at a high level, there may be some favorable percentages working in his favor that are not at all related to skill. There are of course many factors that can influence a player's production; natural skill development, better teammates, more favorable deployment, and even a change in mindset or confidence plus many more. 
+
+\newline
+
+However, there are also major factors that the player has little control over. You might know it as **puck luck**. Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team's goalie play like Martin Brodeur reincarnated? Then there's the inevitability that the other team limps down the ice, gets one or two shots on net, and of course one goes in.[^1] That's bad puck luck, and the idea is that these percentage-based events will mostly even themselves out, so if a player experiences an unusually lucky season they are likely about to run out of luck soon.
+
+
+## Chart Time
+
+One of the easiest percentages to examine is shooting percentage (sh%). A player's sh% is the percent of shots on net that end up being goals out of all shots on net they take. While there is definitely a skill component to sh%, (i.e.- players can sustain a higher/lower shooting percentage over their careers) year-to-year fluctuations are a glaring sign of puck luck.
+
+\newline
+
+Let's use Kyle Turris as an example. Turris began his career with the Coyotes, then was traded to Ottawa in 2011 where he remained until the 2017-2018 season. His career sh% was about 10% and he scored about .23 goals per game. In the 2016-2017 season, he had a sh% of 14.6 (a 46% increase over his average) and scored .35 goals per game (a 52% increase over his average). Skeptical observers may have exclaimed **regression!**, but the Nashville Predators were not skeptical observers. This happened to be the last year of Turris's contract, and Nashville traded for him then promptly gave him a contract worth 71% more than his previous one. Here's what his sh% has looked like since:
+
+```{r, echo = F}
+sh_df %>%
+  filter(player == "KYLE.TURRIS") %>%
+  mutate(label = ifelse(sh_z > 2, player, NA)) %>%
+  ggplot(aes(x = season, y = Sh_perc, group = player)) +
+ # geom_text(aes(label = label)) +
+  geom_line(color = "darkblue", size = 2) +
+  geom_label(aes(label = gpg, fill = gpg), size = 4.5, show.legend = F) +
+  scale_fill_gradient(low = "red", high = "gold") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1L)) +
+  theme_ice +
+  labs(title = "Kyle Turris's Career Shooting Percentage",
+       subtitle = "Goals per game shown in label",
+       x = "Season",
+       y = "Shooting Percent")
+```
+
+He has not been ideal in Nashville, as his sh% and goals per game declined every year.
+
+
+## Players Due for Regression in 2019-20
+
+
+Now that we are aware of the dangers of an unsustainable sh%, who should might be due for some bad puck luck this upcoming season? Below are the four players from last season who had the biggest difference between their 2018-19 shooting percentage and their career average.
+
+```{r, echo = F, fig.width= 6}
+top5 <- sh_df %>%
+  filter(season == "20182019") %>%
+  select(player, Sh_perc, sh_avg, sh_z, seasons) %>%
+  ungroup() %>%
+  arrange(desc(sh_z)) %>%
+  top_n(4, sh_z)
+top5
+
+
+sh_df %>%
+  filter(player %in%  top5$player) %>%
+  ggplot(aes(x = season, y = Sh_perc, group = player)) +  
+  geom_point(color = "darkblue", show.legend = F, size = 2.5) +
+  geom_line(color = "darkblue", show.legend = F, size = 1) +
+  facet_wrap(~player) +
+  scale_x_discrete(labels = abbreviate) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1L)) +
+  theme_ice
+  
+```
+
+
+These four players all had highly unusual shooting percentages. The one that stands out the most to me is Casey Cizikas. After hovering around 9.5% for four straight years, he scored on 18% of his shots this year.  
+Another interesting name here: Matt Duchene. Duchene happened to be in the final year of his contract this past year and put up the highest shooting percentage of his career. Guess which team signed him to a huge contract? That's right, the Nashville Predators. Fool me once...
+
+
+## A Pleasant Plot Twist
+
+
+Remember everything from above where we predicted everyone to have a worse season? Well it turns out that regression works in both directions, meaning players who had *unlucky* seasons can regress to the mean in a *positive* way. These are players who are due for more bounces to go their way, and that usually means a higher shooting percentage. Here are the four players from this past season who can expect a bouceback.
+
+
+```{r, echo = F, fig.width=6}
+bot4 <- sh_df %>%
+  filter(season == "20182019") %>%
+  select(player, Sh_perc, sh_avg, sh_z, seasons) %>%
+  ungroup() %>%
+  arrange(desc(sh_z)) %>%
+  top_n(-4, sh_z)
+bot4
+
+
+sh_df %>%
+  filter(player %in%  bot4$player) %>%
+  ggplot(aes(x = season, y = Sh_perc, group = player)) +  
+  geom_point(color = "darkblue", show.legend = F, size = 2.5) +
+  geom_line(color = "darkblue", show.legend = F, size = 1) +
+  facet_wrap(~player) +
+  scale_x_discrete(labels = abbreviate) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1L)) +
+  theme_ice
+```
+
+
+4. Tobias Rieder (EDM): Rieder scored 0 goals but somehow that wasn't the most unusual percentage (in terms of z-score). Will he repeat that performance this year? (Hint: no)    
+3. Jaden Schwartz (STL): Ah yes, the Blues are definitely the team in need of more bounces.  
+2. Ryan Kesler (ANA): Hampered by injuries, he will not get a chance to bounce back as he will remain on LTIR this upcoming season.
+1. James Neal (The Real Deal): The player who is most due for puck luck. Neal's 18-19 shooting percentage was **2.46** standard deviations below his career average, which has spanned 11 seasons. He will start his redemption tour on a new team after being acquired by Edmonton after spending one season in Calgary. Will Edmonton actually be on the winning end of a [1 for 1 trade?](https://twitter.com/TSNBobMcKenzie/status/748238297273610240) 
+
+## Closing Thoughts
+
+If you made it through, I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a 'career year' or is one game away from being run out of town, make sure they aren't doing on the back of unsustainable percentages.
+
+
+
+
+
+
+[^1]: Can't relate? You must not be a Flyers fan
+
+
