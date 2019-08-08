@@ -178,7 +178,7 @@ sh_df %>%
 
 ## Closing Thoughts
 
-If you made it to the end, I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a 'career year' or is one game away from being run out of town, check the percentages.
+Thanks for making it this far. I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a 'career year' or is one game away from being run out of town, check the percentages.
 
 
 
