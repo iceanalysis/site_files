@@ -73,6 +73,8 @@ To put it simply, regression in the context of hockey is usually the idea that w
 
 However, there are also factors that the player has little control over. You might know it as **puck luck**. Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team's goalie play like Martin Brodeur reincarnated? Then, it's inevitable the other team limps down the ice, gets one or two shots on net, and of course one goes in.[^1] That's bad puck luck, and the idea is that these percentage-based events will mostly even themselves out, so if a player experiences an unusually lucky season they are unlikely to repeat it the following year.
 
+*All data comes from [evolving-hockey.com](https://evolving-hockey.com/)*
+
 
 ## A Case Study
 
