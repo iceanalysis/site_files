@@ -71,7 +71,7 @@ paginate = 4 #frontpage pagination
   weight = 3
   
   [[menu.main]]
-  nae = "Subscribe"
+  name = "Subscribe"
   url = "subscribe/"
   weight = 4
 
