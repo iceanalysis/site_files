@@ -2,15 +2,18 @@
 title: Subscribe   
 ---
 
-Subscribe for notifications. NO spam
+Subscribe for notifications of future content. Your email is not shared with anyone else.
+No spam
+No promotions
+Just the content you want
 
-This is a test
+
 
 <form action="/thanks/" name="contact" method="POST" data-netlify="true">
   <p>
     <label>Email: <input type="text" name="email" /></label>
   </p>
   <p>
-    <button type="submit">Send</button>
+    <button type="submit">Submit</button>
   </p>
 </form>
