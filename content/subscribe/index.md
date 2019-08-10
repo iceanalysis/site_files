@@ -10,7 +10,7 @@ Subscribe for notifications of future content. Your email is not shared with any
 
 
 
-<form action="/thanks/" name="contact" method="POST" data-netlify="true">
+<form action="/thanks/" name="subscribe" method="POST" data-netlify="true">
   <p>
     <label>Email: <input type="text" name="email" /></label>
   </p>
