@@ -2,10 +2,11 @@
 title: Subscribe   
 ---
 
-Subscribe for notifications of future content. Your email is not shared with anyone else.
-No spam
-No promotions
-Just the content you want
+Subscribe for notifications of future content. Your email is not shared with anyone else.  
+
+* No spam  
+* No promotions  
+* Just the content you want  
 
 
 
