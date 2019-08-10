@@ -69,6 +69,11 @@ paginate = 4 #frontpage pagination
   name = "Get in touch"
   url = "contact/"
   weight = 3
+  
+  [[menu.main]]
+  nae = "Subscribe"
+  url = "subscribe/"
+  weight = 4
 
 # this will also be in author bio if there is no writer.
   [params.social]

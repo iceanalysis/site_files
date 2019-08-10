@@ -3,8 +3,10 @@ date: "2019"
 title: Thank you!
 ---
 
+<center>
+
 You've successfully subscribed to new posts
 
 [Go back to the homepage](https://iceanalysis.com)
 
-
+</center>
