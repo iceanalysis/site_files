@@ -6,7 +6,7 @@ Subscribe for notifications. NO spam
 
 This is a test
 
-<form action="/thanks/" name="subscribe" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+<form name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true">
   <p class="hidden">
     <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
   </p>
@@ -14,6 +14,9 @@ This is a test
     <label>Email: <input type="text" name="email" /></label>
   </p>
   <p>
-    <button type="submit">Take my email</button>
+    <label>Message: <textarea name="message"></textarea></label>
+  </p>
+  <p>
+    <button type="submit">Send</button>
   </p>
 </form>
