@@ -14,8 +14,6 @@ This is a test
     <label>Email: <input type="text" name="email" /></label>
   </p>
   <p>
-  </p>
-  <p>
     <button type="submit">Take my email</button>
   </p>
 </form>
