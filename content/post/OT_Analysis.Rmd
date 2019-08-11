@@ -172,6 +172,10 @@ hero_df <- joined_df %>%
 Erik Johnson and Mike Hoffman: they may not be the best in the first sixty minutes, but they turn it on when it counts.
 
 
+---
+Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe) to get notified of future posts.
+
+
 
 
 
