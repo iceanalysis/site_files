@@ -17,8 +17,6 @@ tags:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-Sys.setenv("plotly_username"="iceanalysis")
-Sys.setenv("plotly_api_key" ="g5p4GgJIsKJhRKb7J7z3")
 library(tidyverse)
 library(here)
 library(ggrepel)
