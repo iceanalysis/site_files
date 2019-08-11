@@ -16,6 +16,9 @@ tags:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+Sys.setenv("plotly_username"="iceanalysis")
+Sys.setenv("plotly_api_key" ="g5p4GgJIsKJhRKb7J7z3")
 library(tidyverse)
 library(here)
 library(ggrepel)
@@ -55,8 +58,7 @@ The beauty of SV% is that it's easy to understand and makes comparisons easy. Th
 
 
 ```{r, echo = F}
-Sys.setenv("plotly_username"="iceanalysis")
-Sys.setenv("plotly_api_key" ="g5p4GgJIsKJhRKb7J7z3")
+
 yoy_df <- goalies %>%
   select(player, season, TOI, GA, SA) %>%
   group_by(player, season) %>%
@@ -152,7 +154,7 @@ ggplotly(plot2, tooltip = "text") %>%
 
 
 ...What? It looks nearly identical to the SV% chart. How can that be? Well, there are many factor that are believed to influence goaltending that are difficult to quantify. Variables such as defensive systems, pre-shot movement (did the shot come from a cross-ice pass?), and traffic in front of the net are just some things that are nearly impossible to account for with the currently existing public data. There are many ongoing efforts to enhance our knowledge in these aspects. [Ryan Stimson](https://twitter.com/RK_Stimp) started [The Passing Project](https://www.allaboutthejersey.com/2015/5/20/8627957/2015-passing-project-data-release-volume-i) which included tracking passes before shots and there are many others that manually track so-called 'microstats'. With more context around shots, we can better estimate goaltender ability.
-
+ 
 ## Looking Forward
 
 The 2019-20 NHL season will be the first season in which the NHL implements puck and player tracking in every stadium in the league. Sensors will be placed in players' shoulder pads and in the puck, which will allow cameras to track them to a level of near perfect precision. This data will allow teams to have insight to some of the missing variables we listed above. I'm doubtful that any tracking data will be released to the public, but the teams with analysts capable of capitalizing on this data will have a distinct edge in player evaluation and maybe - just maybe - be able to make evaluating goaltenders slightly less voodoo.
