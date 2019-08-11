@@ -1,0 +1,11 @@
+---
+date: "2019"
+title: Success!
+---
+
+<center>
+
+Your message has successfully be sent. 
+[Go back to the homepage](https://iceanalysis.com)
+
+</center>
