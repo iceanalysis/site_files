@@ -1,6 +1,7 @@
 ---
 "2016-11-06T13:00:25+05:30"
 title: Subscribe   
+showthedate: false
 ---
 
 Subscribe for notifications of future content. Your email is not shared with anyone else.  
