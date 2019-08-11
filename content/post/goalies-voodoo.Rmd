@@ -1,0 +1,186 @@
+---
+title: Why Goalies Are 'Voodoo'
+author: IceAnalysis
+date: '2019-08-11'
+image: img/bob_holtby.webp
+slug: goalies voodoo
+categories:
+  - NHL
+tags:
+  - Goalies
+  - Voodoo
+  - Correlation
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(ggrepel)
+library(extrafont)
+library(plotly)
+
+theme_ice <- theme_bw() +
+  theme(
+    text = element_text(family = "Consolas"),
+    plot.title = element_text(hjust = .5),
+    plot.subtitle = element_text(hjust = .5),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom")
+
+my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
+
+
+
+goalies <- read.csv(here("data", "EH_goalies_all_years.csv"), stringsAsFactors = F)
+```
+
+
+*What makes their performance so hard to predict?*
+<!--more-->
+*Photo: NHL.com*
+
+
+Seemingly everywhere you look these days, analysts shy away from making predictions regarding goaltending, throw their arms up, and say 'goaltending is voodoo.' For someone not familiar with hockey analytics that must sound incredibly strange. What exactly does that mean? Can we ask a witch doctor for assistance? Maybe, but let's dive into what exactly the problem is with evaluating goaltending.
+
+## Predictability
+
+The core benefit of applying statistical analysis to hockey is to assist in making sound decisions based on concrete numbers. Predicting the production and performance of skaters, while not perfect, is much more accurate than goalies. There have been many advancements made to the point where we understand which aspects of a players' game are repeatable skills and which fluctuate at random. For goalies, much less progress has been made. The mainstream stat that is used to compare goalies is save percentage (SV%). It's a simple concept; a goalie's save percentage is the number of goals allowed divided by how many shots they faced.
+
+> SV% = Goals Allowed / Shots Faced
+
+The beauty of SV% is that it's easy to understand and makes comparisons easy. The higher the save percentage, the better the goalie, right? Here comes the bad news. SV% has proven to not be a repeatable skill year-to-year and is prone to massive fluctuations. It's easy to see this when looking at a chart of every goalie's SV% from one year to the next. 
+
+
+```{r, echo = F}
+Sys.setenv("plotly_username"="iceanalysis")
+Sys.setenv("plotly_api_key" ="g5p4GgJIsKJhRKb7J7z3")
+yoy_df <- goalies %>%
+  select(player, season, TOI, GA, SA) %>%
+  group_by(player, season) %>%
+  summarize(toi = sum(TOI),
+            ga = sum(GA),
+            sa = sum(SA),
+            sv_pct = 1 - (ga / sa)) %>%
+  transmute(season = as.integer(str_sub(season, 1, 4)),
+            sv_pct = sv_pct) %>%
+  mutate(year_n = sv_pct,
+         year_n_plus_1 = ifelse(lead(season) == season + 1, lead(sv_pct), NA)) %>%
+  select(player, season, year_n, year_n_plus_1) %>%
+  filter(!is.na(year_n_plus_1))
+
+
+year_n_avg <- yoy_df %>% 
+  ungroup() %>% 
+  summarize(mean = mean(year_n))
+
+year_n_plus_1_avg <- yoy_df %>%
+  ungroup() %>%
+  summarize(mean = mean(year_n_plus_1))
+
+
+plot <- yoy_df %>%
+  ggplot(aes(x = year_n, 
+             y = year_n_plus_1,
+             group = 1,
+             text = paste0("Player: ", player,
+                           "<br>Season: ", season,
+                           paste0("<br>SV% in ",season,": "), round(year_n,3),
+                           paste0("<br>SV% in ",season + 1,": "), round(year_n_plus_1,3)))) +
+  #geom_vline(aes(xintercept = year_n_avg$mean), linetype = "dashed", color = "gray80") +
+  #geom_hline(aes(yintercept = year_n_plus_1_avg$mean), linetype = "dashed", color = "gray80") +
+  geom_point(aes(color = player), show.legend = F) +
+  geom_smooth(method = "lm", se = F, color = "red") +
+  theme_ice +
+  labs(title = "Save Percent in Year N and Year N+1",
+       x = "Save % in Year N",
+       y = "Save % in Year N+1")
+
+gg <- ggplotly(plot, tooltip = "text") %>%
+  config(displayModeBar = F) 
+gg
+
+```
+
+*Double click the names on the legend to isolate and hover for details*
+
+If SV% was consistent from year to year, the patterns would follow a diagonal trend from the bottom left to the top right. Instead, the points are seemingly random. The linear regression, in red, is nearly flat and has an R^2^ of .01 which means a goalie's SV% in a given year can explain 1% of his SV% in the following year. This is a hint that predicting SV% is a fool's errand. If you double click the legend you can explore the results of each goalie. Even on an individual basis the SV% fluctuates greatly from year to year. One of my favorites to look at is Antii Niemi, whose SV% from 2016-2018 was .892 - .929 - .887. Awful - great - awful.
+
+## Alternatives to SV%
+
+One of the newer metrics created in the advanced stats era is Goals Saved Above Average (GSAA). The premise behind it involves using expected goals (see [this post](https://iceanalysis.com/overtime-hero) for a quick rundown on expected goals). Basically, GSAA tries to measure how many goals a goaltender allows compared to a theoretical league average goalie. The way it accomplishes this is by looking at the difficulty of the shot faced (by using XG), calculating the number of goals an average goalie would have conceded (by using historical data), then comparing that number to how many goals were actually scored. Many people would say this is a great improvement over SV% since it accounts for shot difficulty and we intuitively know that some shots are harder to stop than others. Clearly, GSAA is the superior metric and will expose the true talents of goaltenders.
+
+
+```{r, echo = F}
+
+
+gsaa_df <- goalies %>%
+  select(player, season, GSAA) %>%
+  group_by(player, season) %>%
+  summarize(gsaa = sum(GSAA)) %>%
+  transmute(season = as.integer(str_sub(season, 1, 4)),
+            gsaa = gsaa) %>%
+  ungroup() %>%
+  mutate(year_n = gsaa,
+         year_n_plus_1 = ifelse(lead(season) == season + 1, lead(gsaa), NA)) %>%
+  select(player, season, year_n, year_n_plus_1) %>%
+  filter(!is.na(year_n_plus_1))
+
+plot2 <- gsaa_df %>%
+  ggplot(aes(x = year_n,
+             year_n_plus_1,
+             group = 1,
+             text = paste0("Player: ", player,
+                           "<br>Season: ", season,
+                           paste0("<br>GSAA in ",season,": "), round(year_n,3),
+                           paste0("<br>GSAA in ",season + 1,": "), round(year_n_plus_1,3)))) +
+  geom_point(aes(color = player), show.legend = F) +
+  geom_smooth(method = "lm", color = "red", se = F) +
+  theme_ice +
+  labs(title = "GSAA in Year N and Year N+1",
+       x = "GSAA in Year N",
+       y = "GSAA in Year N+1")
+
+ggplotly(plot2, tooltip = "text") %>%
+  config(displayModeBar = F)
+
+
+```
+
+
+
+...What? It looks nearly identical to the SV% chart. How can that be? Well, there are many factor that are believed to influence goaltending that are difficult to quantify. Variables such as defensive systems, pre-shot movement (did the shot come from a cross-ice pass?), and traffic in front of the net are just some things that are nearly impossible to account for with the currently existing public data. There are many ongoing efforts to enhance our knowledge in these aspects. [Ryan Stimson](https://twitter.com/RK_Stimp) started [The Passing Project](https://www.allaboutthejersey.com/2015/5/20/8627957/2015-passing-project-data-release-volume-i) which included tracking passes before shots and there are many others that manually track so-called 'microstats'. With more context around shots, we can better estimate goaltender ability.
+
+## Looking Forward
+
+The 2019-20 NHL season will be the first season in which the NHL implements puck and player tracking in every stadium in the league. Sensors will be placed in players' shoulder pads and in the puck, which will allow cameras to track them to a level of near perfect precision. This data will allow teams to have insight to some of the missing variables we listed above. I'm doubtful that any tracking data will be released to the public, but the teams with analysts capable of capitalizing on this data will have a distinct edge in player evaluation and maybe - just maybe - be able to make evaluating goaltenders slightly less voodoo.
+
+---
+
+#### *Previous: [Shooting Percentages & Puck Luck](https://iceanalysis.com/shooting-percentage-puck-luck/)*
+
+---
+Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe) to get notified of future posts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

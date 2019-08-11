@@ -179,7 +179,13 @@ sh_df %>%
 Thanks for making it this far. I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a 'career year' or is one game away from being run out of town, check the percentages.
 
 ---
+
+#### *Previous: [Overtime? I'll Start Trying Now](https://iceanalysis.com/overtime-hero/)*
+
+---
 Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe) to get notified of future posts.
+
+
 
 
 

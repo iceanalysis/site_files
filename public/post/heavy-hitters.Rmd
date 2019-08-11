@@ -1,0 +1,83 @@
+---
+title: Heavy Hitters
+author: IceAnalysis
+date: '2019-08-10'
+slug: Heavy Hitters
+draft: true
+categories:
+  - NHL
+tags:
+  - Hits
+  - Enforcer
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(ggrepel)
+library(extrafont)
+
+theme_ice <- theme_bw() +
+  theme(
+    text = element_text(family = "Consolas"),
+    plot.title = element_text(hjust = .5),
+    plot.subtitle = element_text(hjust = .5),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom")
+
+my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
+
+
+
+skaters <- read.csv(here("data", "EH_three_year_skaters_all_strengths.csv"), stringsAsFactors = F)
+```
+
+
+*Which players turn it on more in overtime?*
+<!--more-->
+*Photo: (Eric Hartline | USA Today Images)*
+
+
+```{r, echo = F}
+head(skaters)
+
+hits <- skaters %>%
+  select(player, position, season, TOI, iHF, iHA) %>%
+  group_by(player, position) %>%
+  summarize(toi = sum(TOI),
+            hf = sum(iHF),
+            ha = sum(iHA),
+            contact = hf+ha,
+            hf_60 = hf / toi * 60,
+            ha_60 = ha / toi * 60,
+            h_pct = hf / (hf + ha))
+
+
+hits %>%
+  ggplot(aes(x = toi, y = h_pct)) +
+  geom_point(alpha = .25) +
+  geom_smooth() +
+  geom_hline(aes(yintercept = .5))+
+  facet_wrap(~position) +
+  theme_ice
+
+
+
+skaters %>%
+  select(player, season , iHF, iHA) %>%
+  transmute(player,
+            season = as.integer(str_sub(season, 1, 4)),
+            h_pct = iHF / (iHF + iHA)) %>%
+  mutate(year_n = season,
+         year_n_1 = ifelse(lead(season) == season + 1,lead(h_pct), NA))
+
+```
+
+
+
+
+
+
