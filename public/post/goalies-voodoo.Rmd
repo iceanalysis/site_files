@@ -55,7 +55,7 @@ The core benefit of applying statistical analysis to hockey is to assist in maki
 The beauty of SV% is that it's easy to understand and makes comparisons easy. The higher the save percentage, the better the goalie, right? Here comes the bad news. SV% has proven to not be a repeatable skill year-to-year and is prone to massive fluctuations. It's easy to see this when looking at a chart of every goalie's SV% from one year to the next. 
 
 
-```{r, echo = F}
+```{r, echo = F, warning = F, message = F}
 
 yoy_df <- goalies %>%
   select(player, season, TOI, GA, SA) %>%
@@ -100,8 +100,8 @@ plot <- yoy_df %>%
 
 gg <- ggplotly(plot, tooltip = "text") %>%
   config(displayModeBar = F) 
-gg
-
+sv <- api_create(gg, "sv1")
+sv
 ```
 
 *Double click the names on the legend to isolate and hover for details*
@@ -113,7 +113,7 @@ If SV% was consistent from year to year, the patterns would follow a diagonal tr
 One of the newer metrics created in the advanced stats era is Goals Saved Above Average (GSAA). The premise behind it involves using expected goals (see [this post](https://iceanalysis.com/overtime-hero) for a quick rundown on expected goals). Basically, GSAA tries to measure how many goals a goaltender allows compared to a theoretical league average goalie. The way it accomplishes this is by looking at the difficulty of the shot faced (by using XG), calculating the number of goals an average goalie would have conceded (by using historical data), then comparing that number to how many goals were actually scored. Many people would say this is a great improvement over SV% since it accounts for shot difficulty and we intuitively know that some shots are harder to stop than others. Clearly, GSAA is the superior metric and will expose the true talents of goaltenders.
 
 
-```{r, echo = F}
+```{r, echo = F, warning = F, message = F}
 
 
 gsaa_df <- goalies %>%
@@ -143,10 +143,11 @@ plot2 <- gsaa_df %>%
        x = "GSAA in Year N",
        y = "GSAA in Year N+1")
 
-ggplotly(plot2, tooltip = "text") %>%
+gg2 <- ggplotly(plot2, tooltip = "text") %>%
   config(displayModeBar = F)
 
-
+plot2 <- api_create(gg2, "sv2")
+plot2
 ```
 
 
