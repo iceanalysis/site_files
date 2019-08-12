@@ -21,7 +21,6 @@ library(tidyverse)
 library(here)
 library(ggrepel)
 library(extrafont)
-library(plotly)
 
 theme_ice <- theme_bw() +
   theme(
@@ -91,21 +90,18 @@ plot <- yoy_df %>%
                            paste0("<br>SV% in ",season + 1,": "), round(year_n_plus_1,3)))) +
   #geom_vline(aes(xintercept = year_n_avg$mean), linetype = "dashed", color = "gray80") +
   #geom_hline(aes(yintercept = year_n_plus_1_avg$mean), linetype = "dashed", color = "gray80") +
-  geom_point(aes(color = player), show.legend = F) +
+  geom_point(color = "darkblue", alpha = .5) +
   geom_smooth(method = "lm", se = F, color = "red") +
   theme_ice +
   theme(legend.position = "none") +
   labs(title = "SV% in Year N and Year N+1",
        x = "Save % in Year N",
        y = "Save % in Year N+1")
+plot
 
-gg <- ggplotly(plot, tooltip = "text") %>%
-  config(displayModeBar = F) 
-sv <- api_create(gg, "sv1")
-sv
 ```
 
-*Hover or tap for details*
+
 
 If SV% was consistent from year to year, the patterns would follow a diagonal trend from the bottom left to the top right. Instead, the points are seemingly random. The linear regression, in red, is nearly flat and has an R^2^ of .01 which means a goalie's SV% in a given year can explain 1% of his SV% in the following year. This is a hint that predicting SV% is a fool's errand. Even on an individual basis the SV% fluctuates greatly from year to year. One of the best examples of this is Antii Niemi, whose SV% from 2016-2018 was .892 - .929 - .887. Awful - great - awful.
 
@@ -137,7 +133,7 @@ plot2 <- gsaa_df %>%
                            "<br>Season: ", season,
                            paste0("<br>GSAA in ",season,": "), round(year_n,3),
                            paste0("<br>GSAA in ",season + 1,": "), round(year_n_plus_1,3)))) +
-  geom_point(aes(color = player), show.legend = F) +
+  geom_point(color = "darkblue", alpha = .5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_ice +
   theme(legend.position = "none") +
@@ -145,10 +141,6 @@ plot2 <- gsaa_df %>%
        x = "GSAA in Year N",
        y = "GSAA in Year N+1")
 
-gg2 <- ggplotly(plot2, tooltip = "text") %>%
-  config(displayModeBar = F)
-
-plot2 <- api_create(gg2, "sv2")
 plot2
 ```
 

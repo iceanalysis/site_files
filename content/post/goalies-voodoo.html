@@ -25,16 +25,13 @@ tags:
 <p>SV% = Goals Allowed / Shots Faced</p>
 </blockquote>
 <p>The beauty of SV% is that it’s easy to understand and makes comparisons easy. The higher the save percentage, the better the goalie, right? Here comes the bad news. SV% has proven to not be a repeatable skill year-to-year and is prone to massive fluctuations. It’s easy to see this when looking at a chart of every goalie’s SV% from one year to the next.</p>
-<iframe src="https://plot.ly/~iceanalysis/3.embed" width="800" height="600" id="igraph" scrolling="no" seamless="seamless" frameBorder="0">
-</iframe>
-<p><em>Hover or tap for details</em></p>
+<p><img src="/post/goalies-voodoo_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>If SV% was consistent from year to year, the patterns would follow a diagonal trend from the bottom left to the top right. Instead, the points are seemingly random. The linear regression, in red, is nearly flat and has an R<sup>2</sup> of .01 which means a goalie’s SV% in a given year can explain 1% of his SV% in the following year. This is a hint that predicting SV% is a fool’s errand. Even on an individual basis the SV% fluctuates greatly from year to year. One of the best examples of this is Antii Niemi, whose SV% from 2016-2018 was .892 - .929 - .887. Awful - great - awful.</p>
 </div>
 <div id="alternatives-to-sv" class="section level2">
 <h2>Alternatives to SV%</h2>
 <p>One of the newer metrics created in the advanced stats era is Goals Saved Above Average (GSAA). The premise behind it involves using expected goals (see <a href="https://iceanalysis.com/overtime-hero">this post</a> for a quick rundown on expected goals). Basically, GSAA tries to measure how many goals a goaltender allows compared to a theoretical league average goalie. The way it accomplishes this is by looking at the difficulty of the shot faced (by using XG), calculating the number of goals an average goalie would have conceded (by using historical data), then comparing that number to how many goals were actually scored. Many people would say this is a great improvement over SV% since it accounts for shot difficulty and we intuitively know that some shots are harder to stop than others. Clearly, GSAA is the superior metric and will expose the true talents of goaltenders.</p>
-<iframe src="https://plot.ly/~iceanalysis/5.embed" width="800" height="600" id="igraph" scrolling="no" seamless="seamless" frameBorder="0">
-</iframe>
+<p><img src="/post/goalies-voodoo_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>…What? It looks nearly identical to the SV% chart. How can that be? Well, there are many factor that are believed to influence goaltending that are difficult to quantify. Variables such as defensive systems, pre-shot movement (did the shot come from a cross-ice pass?), and traffic in front of the net are just some things that are nearly impossible to account for with the currently existing public data. There are many ongoing efforts to enhance our knowledge in these aspects. <a href="https://twitter.com/RK_Stimp">Ryan Stimson</a> started <a href="https://www.allaboutthejersey.com/2015/5/20/8627957/2015-passing-project-data-release-volume-i">The Passing Project</a> which included tracking passes before shots and there are many others that manually track so-called ‘microstats’. With more context around shots, we can better estimate goaltender ability.</p>
 </div>
 <div id="looking-forward" class="section level2">
