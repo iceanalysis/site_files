@@ -95,7 +95,7 @@ plot <- yoy_df %>%
   geom_smooth(method = "lm", se = F, color = "red") +
   theme_ice +
   theme(legend.position = "none") +
-  labs(title = "Save Percent in Year N and Year N+1",
+  labs(title = "SV% in Year N and Year N+1",
        x = "Save % in Year N",
        y = "Save % in Year N+1")
 
@@ -105,9 +105,9 @@ sv <- api_create(gg, "sv1")
 sv
 ```
 
-*Double click the points to isloate individuals and hover for details*
+*Hover or tap for details*
 
-If SV% was consistent from year to year, the patterns would follow a diagonal trend from the bottom left to the top right. Instead, the points are seemingly random. The linear regression, in red, is nearly flat and has an R^2^ of .01 which means a goalie's SV% in a given year can explain 1% of his SV% in the following year. This is a hint that predicting SV% is a fool's errand. If you double click the points you can explore the results of each goalie. Even on an individual basis the SV% fluctuates greatly from year to year. One of my favorites to look at is Antii Niemi, whose SV% from 2016-2018 was .892 - .929 - .887. Awful - great - awful.
+If SV% was consistent from year to year, the patterns would follow a diagonal trend from the bottom left to the top right. Instead, the points are seemingly random. The linear regression, in red, is nearly flat and has an R^2^ of .01 which means a goalie's SV% in a given year can explain 1% of his SV% in the following year. This is a hint that predicting SV% is a fool's errand. Even on an individual basis the SV% fluctuates greatly from year to year. One of the best examples of this is Antii Niemi, whose SV% from 2016-2018 was .892 - .929 - .887. Awful - great - awful.
 
 ## Alternatives to SV%
 
