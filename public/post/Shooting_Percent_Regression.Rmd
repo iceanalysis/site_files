@@ -63,9 +63,8 @@ sh_df <- skaters %>%
 
 
 
-## Luck or Math?
 
-Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team's goalie play like Martin Brodeur reincarnated? Then the other team limps down the ice, gets one or two shots on net, and of course one scores a goal.[^1] Some may refer to this as bad **puck luck.**  The tricky thing about puck luck is that it is impossible to sustain, meaning that a change in luck is always just around the corner. This is an example of what stats nerds refer to as *regression to the mean.*  
+Have you ever watched your favorite team dominate play, creating shot after shot only to have the other team's goalie play like Martin Brodeur reincarnated? Then the other team limps down the ice, gets one or two shots on net, and of course one scores a goal. Some may refer to this as bad **puck luck.**  The tricky thing about puck luck is that it is impossible to sustain, meaning that a change in luck is always just around the corner. This is an example of what stats nerds refer to as *regression to the mean.*  
 
 
 
@@ -186,10 +185,5 @@ Thanks for making it this far. I hope you have a clearer understanding of how re
 Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe) to get notified of future posts.
 
 
-
-
-
-
-[^1]: Can't relate? You must not be a Flyers fan
 
 
