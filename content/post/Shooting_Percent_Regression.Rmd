@@ -131,6 +131,7 @@ sh_df %>%
   my_labs
 ```
 
+<center> *See end of page for more players* </center>
 
 These four players all had highly unusual shooting percentages. The one that stands out the most to me is Casey Cizikas. After hovering around 9.5% for four straight years, he scored on 18% of his shots this year.  
 Another interesting name here: Matt Duchene. Duchene happened to be in the final year of his contract this past year and put up the highest shooting percentage of his career. Guess which team signed him to a huge contract? That's right, the Nashville Predators. Fool me once...
@@ -162,7 +163,9 @@ sh_df %>%
   scale_y_continuous(labels = scales::percent_format(accuracy = 1L)) +
   theme_ice +
   my_labs
+
 ```
+<center> *See end of page for more players* </center>
 
 
 * David Backes (BOS): A 35 year old veteran player with a rich cap hit, Backes has seen his sh% decline for the fifth straight year. After being a healthy scratch during Boston's playoff run, many people wonder how much he has left.
@@ -176,6 +179,35 @@ sh_df %>%
 ## Closing Thoughts
 
 Thanks for making it this far. I hope you have a clearer understanding of how regression plays a factor in hockey. Remember, whether a player is having a 'career year' or is one game away from being run out of town, check the percentages.
+
+**Top 10 Overperformers in 2018-19**
+
+1. Travis Zajac
+2. Matt Duchene
+3. Jakob Silfverberg
+4. Casey Cizikas
+5. Valtteri Filppula
+6. James van Riemsdyk
+7. Joe Pavelski
+8. Ryan Strome
+9. Tom Wilson
+10. Patrice Bergeron
+
+
+**Top 10 Underperformers in 2018-19**
+
+1. James Neal
+2. Ryan Kesler
+3. Jaden Schwartz
+4. Tobias Rieder
+5. David Backes
+6. Riley Nash
+7. Tom Pyatt
+8. Tyler Toffoli
+9. Jeff Carter
+10. Ondrej Palat
+
+
 
 ---
 
