@@ -341,36 +341,36 @@ Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe)
 ## 2018-19 Team-by-Team Results
 
 
-[ANA](/img/2018-19-ANA.jpg)
-[ARI]
-[BOS]
-[BUF]
-[CAR]
-[CBJ]
-[CGY]
-[CHI]
-[COL]
-[DAL]
-[EDM]
-[FLA]
-[LAK]
-[MIN]
-[MTL]
-[NSH]
-[NJD]
-[NYI]
-[NYR]
-[OTT]
-[PHI]
-[PIT]
-[SJS]
-[STL]
-[TBL]
-[TOR]
-[VAN]
-[VEG]
-[WPG]
-[WSH]
+[ANA](/img/2018-19-ANA.png)
+[ARI](/img/2018-19-ARI.png)
+[BOS](/img/2018-19-BOS.png)
+[BUF](/img/2018-19-BUF.png)
+[CAR](/img/2018-19-CAR.png)
+[CBJ](/img/2018-19-CBJ.png)
+[CGY](/img/2018-19-CGY.png)
+[CHI](/img/2018-19-CHI.png)
+[COL](/img/2018-19-COL.png)
+[DAL](/img/2018-19-DAL.png)
+[EDM](/img/2018-19-EDM.png)
+[FLA](/img/2018-19-FLA.png)
+[LAK](/img/2018-19-LAK.png)
+[MIN](/img/2018-19-MIN.png)
+[MTL](/img/2018-19-MTL.png)
+[NSH](/img/2018-19-NSH.png)
+[NJD](/img/2018-19-NJD.png)
+[NYI](/img/2018-19-NYI.png)
+[NYR](/img/2018-19-NYR.png)
+[OTT](/img/2018-19-OTT.png)
+[PHI](/img/2018-19-PHI.png)
+[PIT](/img/2018-19-PIT.png)
+[SJS](/img/2018-19-SJS.png)
+[STL](/img/2018-19-STL.png)
+[TBL](/img/2018-19-TBL.png)
+[TOR](/img/2018-19-TOR.png)
+[VAN](/img/2018-19-VAN.png)
+[VEG](/img/2018-19-VEG.png)
+[WPG](/img/2018-19-WPG.png)
+[WSH](/img/2018-19-WSH.png)
 
 
 
