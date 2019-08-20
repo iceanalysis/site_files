@@ -1,0 +1,391 @@
+---
+title: Modelling Playoff Chances
+author: IceAnalysis
+date: '2019-08-18'
+image: img/lightning.jpg
+slug: playoff-chances
+categories:
+  - NHL
+tags:
+  - decision model
+  - standings points
+  - gganimate
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rvest)
+library(beepr)
+library(gganimate)
+library(extrafont)
+library(knitr)
+
+
+
+theme_ice <- theme_bw() +
+  theme(
+    text = element_text(family = "Consolas"),
+    plot.title = element_text(hjust = .5),
+    plot.subtitle = element_text(hjust = .5),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom")
+
+my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
+
+
+team_list1819 <- list()
+year_list1819 <- list()
+
+teams1819 <- c("ANA",
+               "ARI",
+               "BOS",
+               "BUF",
+               "CAR",
+               "CBJ",
+               "CGY",
+               "CHI",
+               "COL",
+               "DAL",
+               "DET",
+               "EDM",
+               "FLA",
+               "LAK",
+               "MIN",
+               "MTL",
+               "NSH",
+               "NJD",
+               "NYI",
+               "NYR",
+               "OTT",
+               "PHI",
+               "PIT",
+               "SJS",
+               "STL",
+               "TBL",
+               "TOR",
+               "VAN",
+               "VEG",
+               "WPG",
+               "WSH")
+
+for(j in 2018:2019) {
+  for(i in teams1819) {
+    team_url <- paste0("https://www.hockey-reference.com/teams/",i,"/",j,"_games.html")
+    webpage <- read_html(team_url)
+    team_tbl <- webpage %>%
+      html_nodes("table") %>%
+      html_table(fill = T)
+    team_df <- data.frame(team_tbl[[1]])
+    team_df$team = i
+    team_df$year = j
+    team_list1819[[i]] <- team_df
+  }
+  year_list1819[[j]] <- data.frame(data.table::rbindlist(team_list1819))
+}  ; beep()
+df1819 <- data.frame(data.table::rbindlist(year_list1819))
+
+
+
+team_list1517 <- list()
+year_list1517 <- list()
+
+teams1517 <- c("ANA",
+               "ARI",
+               "BOS",
+               "BUF",
+               "CAR",
+               "CBJ",
+               "CGY",
+               "CHI",
+               "COL",
+               "DAL",
+               "EDM",
+               "FLA",
+               "LAK",
+               "MIN",
+               "MTL",
+               "NSH",
+               "NJD",
+               "NYI",
+               "NYR",
+               "OTT",
+               "PHI",
+               "PIT",
+               "SJS",
+               "STL",
+               "TBL",
+               "TOR",
+               "VAN",
+               "WPG",
+               "WSH")
+
+
+for(j in 2015:2017) {
+  for(i in teams1517) {
+    team_url <- paste0("https://www.hockey-reference.com/teams/",i,"/",j,"_games.html")
+    webpage <- read_html(team_url)
+    team_tbl <- webpage %>%
+      html_nodes("table") %>%
+      html_table(fill = T)
+    team_df <- data.frame(team_tbl[[1]])
+    team_df$team = i
+    team_df$year = j
+    team_list1517[[i]] <- team_df
+  }
+  year_list1517[[j]] <- data.frame(data.table::rbindlist(team_list1517))
+}  ; beep()
+df1517 <- data.frame(data.table::rbindlist(year_list1517, fill = T))
+
+
+
+
+df_all <- rbind(df1517, df1819)
+
+df <- subset(df_all, GP != "GP") %>%
+  select(team, year, GP, Date, W, L, OL,) %>%
+  mutate(GP = as.integer(GP),
+         Date = as.Date(Date),
+         W = as.integer(W),
+         L = as.integer(L),
+         OL = as.integer(OL),
+         div = ifelse(team %in% c("TBL",
+                                  "BOS",
+                                  "TOR",
+                                  "MTL",
+                                  "FLA",
+                                  "BUF",
+                                  "DET",
+                                  "OTT"), "Atlantic",
+                      ifelse(team %in% c("WSH",
+                                         "NYI",
+                                         "PIT",
+                                         "CAR",
+                                         "CBJ",
+                                         "PHI",
+                                         "NYR",
+                                         "NJD"), "Metro",
+                             ifelse(team %in% c("NSH",
+                                                "WPG",
+                                                "STL",
+                                                "DAL",
+                                                "COL",
+                                                "CHI",
+                                                "MIN"), "Central", "Pacific")))) %>%
+  group_by(team, year) %>%
+  mutate(pts = W*2 + OL*1,
+         p_82 = (pts / GP) * 82) %>%
+  ungroup()
+
+
+
+density_df <- df %>%
+  group_by(team, year) %>%
+  mutate(final = ifelse(GP == 82, pts, NA)) %>%
+  fill(final, .direction = "up") %>%
+  mutate(diff = p_82 - final)
+
+
+sd_df <- density_df %>%
+  group_by(GP) %>%
+  summarize(mean = mean(diff),
+            upper = quantile(diff, .95),
+            lower = quantile(diff, .05)) %>%
+  mutate(safe = 95 + upper,
+         out = 95 + lower) %>%
+  filter(GP >= 10,
+         GP < 82)
+
+```
+
+
+*How late is too late, and how early is early enough?*
+<!--more-->
+*Photo: (Getty Images)*
+
+
+
+With a grueling 82 game season that stretches from October to April, the NHL certainly allows plenty of time for the best teams 16 teams to prove themselves worthy of a playoff spot. Each season there are some teams establish themselves early as a powerhouse and coast to the playoffs with little drama, some that struggle and never have a chance, but plenty more that fall somewhere in between. There are instances of teams that [appear strong, but falter late and miss the playoffs](https://en.wikipedia.org/wiki/2013%E2%80%9314_Toronto_Maple_Leafs_season) and [others that begin slowly but recover in time to make playoffs](https://twitter.com/domluszczyszyn/status/1125974421309665280?s=21).  
+
+But the question here is, at what point can we confidently say that a team will either make or miss playoffs? Elliotte Friedman has a famous ["November 1" rule](https://www.sportsnet.ca/hockey/nhl/nhl-team-playoff-hopes-start-die-november/) which states "teams four points (or more) out of the playoffs at Nov. 1 rarely overcome the deficit." While the rule yields pretty good results it seems a little too arbitrary. Using historical data, we can look at season long point paces and examine when teams should either pack it in, or start looking ahead to the post-season.
+
+### Methods
+
+Teams in the NHL are rewarded two standings points for winning a game and one standing point for losing a game in either overtime or a shootout. One way to measure a team's progress during a season is to extrapolate their point rate to what it would be over a full 82 game season (abbreviated P/82). For example, if a team is 1-0-0, their P/82 is 164 - wow! After only one game that stat is useless. But, at what point is it a reliable predictor of a team's end of season point total? To get an idea let's look at how teams have fared in the past. Using data from the last 5 seasons, we can see how a team's P/82 pace at different game numbers into the season compare to their final points. 
+
+
+```{r, echo = F, message=F}
+
+density_df %>%
+  filter(GP >= 12,
+         GP < 82) %>%
+  ggplot() +
+  geom_vline(data = sd_df, aes(xintercept = lower), color = "red") +
+  geom_vline(data = sd_df, aes(xintercept = upper), color = "red") +
+  geom_text(data = sd_df, aes(x = lower - 5,y = .05, label = round(lower,0)),
+            color = "red", size = 5) +
+  geom_text(data = sd_df, aes(x = upper + 5, y = .05, label = round(upper,0)),
+            color = "red", size = 5) +
+  geom_density(aes(x = diff), color = "darkblue") +
+  coord_cartesian(ylim = c(0, .075),
+                  xlim = c(-40, 40)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_ice +
+  my_labs +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank()) +
+  transition_time(GP) +
+  labs(title = "How Long Do Teams Have to Turn it Around?",
+       subtitle = 'Games Played: {frame_time}',
+       x = "Current P/82 Pace Compared to Final Point Total") +
+  ease_aes("linear")
+```
+
+
+What you're seeing here is the distribution of the difference in P/82 compared to the true end of season total. A difference of 0 means no change in P/82 from that point in time to the end of year, a difference of -20 means a team's P/82 pace is 20 less than what they ended with, and a difference of +20 means the pace is 20 more than what they finished with. The higher the blue curve is, the more teams are at that specific pace at that point in time. As you could expect, as the season progresses, the teams' P/82 pace gets closer and closer to their final point total.  
+
+Take notice of the red vertical lines; those signify the middle 90% of outcomes. So, if you look at the chart on game 41, the numbers corresponding to the intervals are -14 and 16. That means that by the mid-point of the season, 90% of teams did not finish more than 14 points above their current pace or 16 points below their current pace. That's an unfortunately wide interval; with half of the games played there is still a 30 point wide range of outcomes.
+
+### Playoffs!?
+
+One way to use this information is to look at a team's P/82 on a certain game number and compare their range of outcomes to what it would take to make playoffs. In the past five seasons, the last wildcard spot was earned with an average of 95 points. So, if a team's lowest projected P/82 at any point in the season is more than 95, we'll call them a lock for the post-season. On the other hand, if a team's maximum projected P/82 is lower than 95 at any point, we'll call them a lock for an early golf season. **Once a team passes either limit, that is their predicted outcome regardless if they move back below/above it.** We'll make the minimum games played cutoff 12. This is inspired by Friedman's Nov 1 rule, since November 1 usually corresponds to roughly the twelfth game of the season. Now let's calculate how early we can confidently say teams are in or out of the playoffs.  
+
+The chart below shows the limits when we can say a team has been eliminated or has clinched a playoff berth.
+
+```{r, echo = F}
+
+sd_df %>%
+  ggplot(aes(x = GP)) +
+  geom_line(aes(y = safe), color = "green", size = 2) +
+  geom_line(aes(y = out), color = "red", size = 2) +
+  geom_hline(aes(yintercept = 95), linetype = "dashed") +
+  labs(title = "When Teams Can Teams be Deemed Clinched or Eliminated",
+       x = "Games Played",
+       y = "P/82 Pace") +
+  annotate("text", x = 20, y = 130, label = "Clinched Line", color = "darkgreen", family = "Consolas") +
+  annotate("text", x = 25, y = 62, label = "Eliminated Line", color = "darkred", family = "Consolas") +
+  annotate("text", x= 17, y = 97, label = "95 point cut-off", color = "gray40", family = "Consolas")+
+  my_labs +
+  theme_ice
+```
+
+
+The green line shows the P/82 pace at which a team is considered a lock for playoffs and the red shows the p/82 at which they are eliminated. For example, if a team is on pace for 116 points or more by game 20, pencil them in for playoffs. Conversely, if a team is on pace for less than 69 points by the twentieth game, playoffs are not in their future.
+
+Here is a table showing these limits on a game-by-game basis:
+
+```{r, echo = F}
+sd_df %>%
+  select(GP, safe, out) %>%
+  transmute(`Games Played` = GP,
+         `Eliminated Threshold` = round(out,0),
+         `Clinched Threshold` = round(safe,0)) %>% kable()
+
+```
+
+
+
+### Case Studies
+
+First, let's see how the model fared in the 2018-19 season. Twelve teams managed to pass the 'clinched' threshold at some point in the season. Of those, 11 made playoffs. The one exception was Buffalo, who started the season on a tear but fell apart down the stretch. On the other end of the spectrum 18 teams fell below the 'eliminated' line during the season. Obviously that can't be possible since only 15 teams *don't* make playoffs. The three teams that made playoffs out of that group are Vegas, St. Louis, and Dallas. All three teams had their struggles but managed to turn it around. That leaves one team, Montreal, who never went above or below either line. They bounced around the middle all the way to the end, to the point where they were never deemed clinched or eliminated, even at game 81.  
+
+> **All 2018-19 team results are at the end of article**
+
+
+But that's only one season. Expanding it to include all five years of our sample yields the following:
+
+Of the 80 teams that made the playoffs, the model successfully predicted 60 of them. Of the 72 teams that did not make playoffs, the model predicted 64. There were 10 team that the model did not feel strongly enough about to predict one way or the other, so we'll ignore those for 10 teams for now.
+
+
+### Strengths 
+
+Ignoring the teams that the model did not make a prediction on, the true negative rate (TNR, or specificity) is 94.1%. This means that 94.1% of the teams that did **not** make playoffs were correctly predicted as so. Conversely, the true positive rate (TPR, or sensitivity) is 81%, meaning that the model correctly categorized 81% of the playoff teams as such.  
+
+The real strength of this model is its *false positive rate* (FPR), which is 5.88% (and simply calculated as 1 - TNR). This is saying that only 5.88% of teams the model predicted to make the playoffs went on to miss playoffs.
+
+### Weaknesses
+
+It was hinted at above, but the model has a *false negative rate* (FNR) of 18.9%. This means that the model tends to label teams as 'eliminated' earlier than it should, as 18.9% (slightly less than 1 in 5) of the teams it thought were eliminated went on to the playoffs.  
+
+Another potential weakness is the rare instances of when the model fails to categorize a team either way. This happens when a team maintains a P/82 pace that hovers around 95 throughout the year.
+
+
+### Possible Improvements
+
+There are a few possible improvements that immediately stand out. First, we used a simple 95 point cutoff as our playoff threshold. In reality, there are seasons when 90 points can get you in, and other seasons when 96 points is not enough. Instead of sticking to a flat 95 each year, having a dynamic cutoff that accounted for the overall strength of all teams in a given year would improve accuracy.  
+
+Second, we started at game #12 because of previously existing arbitrary work. I'm skeptical that 12 games is enough to make a confident decision, so an improvement may be made there.  
+
+Last, while it may seem like a weakness that there are times where the model does not classify a team either way, I'm not sure that's a bad thing. When a team's P/82 pace hovers around the playoff line all season, it would make sense to not make a hasty prediction.
+
+
+### Takeaways
+
+This model is not perfect, but one area it excels is in deciding when teams are safely in the playoffs. Only 5.88% of the teams it thought would make playoffs failed to do so. On the other hand, it is a little quick to label teams as 'eliminated.' Slightly less than 1 in 5 teams it thought were out, ended up being in. Efforts will be made in the future to improve upon these results, and I am open to any suggestions.
+
+
+---
+
+#### *Previous: [Why Goalies are 'Voodoo'](https://iceanalysis.com/goalies-voodoo/)*
+
+---
+Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe) to get notified of future posts.
+
+
+
+## 2018-19 Team-by-Team Results
+
+
+[ANA](/img/2018-19-ANA.png)
+[ARI](/img/2018-19-ARI.png)
+[BOS](/img/2018-19-BOS.png)
+[BUF](/img/2018-19-BUF.png)
+[CAR](/img/2018-19-CAR.png)
+[CBJ](/img/2018-19-CBJ.png)
+[CGY](/img/2018-19-CGY.png)
+[CHI](/img/2018-19-CHI.png)
+[COL](/img/2018-19-COL.png)
+[DAL](/img/2018-19-DAL.png)
+[EDM](/img/2018-19-EDM.png)
+[FLA](/img/2018-19-FLA.png)
+[LAK](/img/2018-19-LAK.png)
+[MIN](/img/2018-19-MIN.png)
+[MTL](/img/2018-19-MTL.png)
+[NSH](/img/2018-19-NSH.png)
+[NJD](/img/2018-19-NJD.png)
+[NYI](/img/2018-19-NYI.png)
+[NYR](/img/2018-19-NYR.png)
+[OTT](/img/2018-19-OTT.png)
+[PHI](/img/2018-19-PHI.png)
+[PIT](/img/2018-19-PIT.png)
+[SJS](/img/2018-19-SJS.png)
+[STL](/img/2018-19-STL.png)
+[TBL](/img/2018-19-TBL.png)
+[TOR](/img/2018-19-TOR.png)
+[VAN](/img/2018-19-VAN.png)
+[VEG](/img/2018-19-VEG.png)
+[WPG](/img/2018-19-WPG.png)
+[WSH](/img/2018-19-WSH.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
