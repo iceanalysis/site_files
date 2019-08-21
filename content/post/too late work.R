@@ -225,12 +225,9 @@ density_df %>%
        x = "Current P/82 Pace Compared to Final Point Total") +
   ease_aes("linear")
 
-
-
+library(here)
 for (i in teams1819) {
   
-
-
 density_df %>%
   filter(team == i,
          year == 2019) %>%
@@ -238,13 +235,19 @@ density_df %>%
   filter(GP >=12) %>%
   ggplot() +
   geom_line(aes(x = GP, y = p_82), color = "darkblue",  show.legend = F) +
-  #geom_text_repel(aes(x = 12, y = p_82, label = lab, group = team), family = "Consolas") +
+  geom_text(aes(x = 82, y = p_82, label = lab, group = team), family = "Consolas") +
   geom_hline(aes(yintercept = 95), linetype = "dashed") +
+    labs(title = "When Teams Can Teams be Deemed Clinched or Eliminated",
+         x = "Games Played",
+         y = "P/82 Pace") +
+    annotate("text", x = 20, y = 130, label = "Clinched Line", color = "darkgreen", family = "Consolas") +
+    annotate("text", x = 25, y = 62, label = "Eliminated Line", color = "darkred", family = "Consolas") +
+    annotate("text", x= 20, y = 97, label = "95 point cut-off", color = "gray40", family = "Consolas")+
   geom_line(data = sd_df, aes(x = GP, y = safe), color = "darkgreen", size = 2) +
   geom_line(data = sd_df, aes(x = GP, y = out), color = "darkred", size = 2) +
   theme_ice +
     labs(title = paste0("2018-19 Results ", i)) +
-    ggsave(filename = paste0("2018-19 - ", i, ".png"))
+    ggsave(path = here::here("static/img/"), filename = paste0("2018-19-", i, ".png"))
 
 }
 
@@ -277,9 +280,9 @@ joined_df %>%
   my_labs +
   theme_ice
 
-View(joined_df %>% filter(year == 2019,
+View(joined_df %>% filter(year == 2015,
                           !is.na(col)) %>%
        group_by(team) %>%
        filter(GP == min(GP)) %>%
-       select(team, GP, pts, p_82, col) %>%
+       select(team, col) %>%
        ungroup())

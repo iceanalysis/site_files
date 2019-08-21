@@ -11,8 +11,8 @@
              "@id": "\/"
         },
         "articleSection" : "post",
-        "name" : "Modelling Playoff Chances",
-        "headline" : "Modelling Playoff Chances",
+        "name" : "Modeling Playoff Chances",
+        "headline" : "Modeling Playoff Chances",
         "description" : "\r\n\r\n\r\n\x3cp\x3e\x3cem\x3eHow late is too late, and how early is early enough?\x3c\/em\x3e\r\n",
         "inLanguage" : "en",
         "author" : "IceAnalysis",
@@ -24,14 +24,14 @@
         "datePublished": "2019-08-18 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-08-18 00:00:00 \x2b0000 UTC",
         "url" : "\/playoff-chances\/",
-        "wordCount" : "1720",
+        "wordCount" : "1593",
         "image" : "/img/lightning.jpg"",
         "keywords" : [ ""decision model"",""standings points"",""gganimate"","Blog" ]   
     }
     </script>
 
 
- <title>Modelling Playoff Chances </title>
+ <title>Modeling Playoff Chances </title>
 
 
 <meta name="description" content="Contextualizing ice hockey using data analysis" />
@@ -45,9 +45,9 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-<link href="/css/style.css?v=1566265291" rel="stylesheet" id="theme-stylesheet" type='text/css' media='all'>
+<link href="/css/style.css?v=1566355878" rel="stylesheet" id="theme-stylesheet" type='text/css' media='all'>
 
-<link href="/css/custom.css?v=1566265291" rel="stylesheet" type='text/css' media='all'>
+<link href="/css/custom.css?v=1566355878" rel="stylesheet" type='text/css' media='all'>
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
 
@@ -234,17 +234,18 @@ if (!doNotTrack) {
 
         </div>
         <div class='entry-header'>
-          <h1 class='entry-title'> Modelling Playoff Chances</h1>
+          <h1 class='entry-title'> Modeling Playoff Chances</h1>
         </div>
         <div class="entry-container">
           <div class="entry-content">
             <article>
               <em>Photo: (Getty Images)</em></p>
-<p>With a grueling 82 game season that stretches from October to April, the NHL certainly allows plenty of time for the best teams 16 teams to prove themselves worthy of a playoff spot. Each season there are some teams establish themselves early as a powerhouse and coast to the playoffs with little drama, some that struggle and never have a chance, but plenty more that fall somewhere in between. There are instances of teams that <a href="https://en.wikipedia.org/wiki/2013%E2%80%9314_Toronto_Maple_Leafs_season">appear strong, but falter late and miss the playoffs</a> and <a href="https://twitter.com/domluszczyszyn/status/1125974421309665280?s=21">others that begin slowly but recover in time to make playoffs</a>.</p>
+<p><em>Disclaimer: This article is a little heavy on the numbers. If that’s not your thing, feel free to look at the pretty charts along the way and read the takeaways at the end.</em></p>
+<p>With a grueling 82 game season that stretches from October to April, the NHL certainly allows plenty of time for the best 16 teams to prove themselves worthy of a playoff spot. Each season there are some teams establish who themselves early as a powerhouse and coast to the playoffs with little drama, some that struggle and never have a chance, but plenty more that fall somewhere in between. There are instances of teams that <a href="https://en.wikipedia.org/wiki/2013%E2%80%9314_Toronto_Maple_Leafs_season">appear strong, but falter late and miss the playoffs</a> and <a href="https://twitter.com/domluszczyszyn/status/1125974421309665280?s=21">others that begin slowly but recover in time to make playoffs</a>.</p>
 <p>But the question here is, at what point can we confidently say that a team will either make or miss playoffs? Elliotte Friedman has a famous <a href="https://www.sportsnet.ca/hockey/nhl/nhl-team-playoff-hopes-start-die-november/">“November 1” rule</a> which states “teams four points (or more) out of the playoffs at Nov. 1 rarely overcome the deficit.” While the rule yields pretty good results it seems a little too arbitrary. Using historical data, we can look at season long point paces and examine when teams should either pack it in, or start looking ahead to the post-season.</p>
 <div id="methods" class="section level3">
 <h3>Methods</h3>
-<p>Teams in the NHL are rewarded two standings points for winning a game and one standing point for losing a game in either overtime or a shootout. One way to measure a team’s progress during a season is to extrapolate their point rate to what it would be over a full 82 game season (abbreviated P/82). For example, if a team is 1-0-0, their P/82 is 164 - wow! After only one game that stat is useless. But, at what point is it a reliable predictor of a team’s end of season point total? To get an idea let’s look at how teams have fared in the past. Using data from the last 5 seasons, we can see how a team’s P/82 pace at different game numbers into the season compare to their final points.</p>
+<p>Teams in the NHL are rewarded two standings points for winning a game and one standing point for losing a game in either overtime or a shootout. One way to measure a team’s progress during a season is to extrapolate their point rate to what it would be over a full 82 game season (abbreviated P/82). For example, if a team is 1-0-0, their P/82 is 164 - wow! After only one game that stat is useless. But, at what point is it a reliable predictor of a team’s end of season point total? To get an idea let’s look at how teams have fared in the past. Using data from the last 5 seasons, we can see how a team’s P/82 pace at different points into the season compare to their final points.</p>
 <p><img src="/post/how-late-is-too-late_files/figure-html/unnamed-chunk-1-1.gif" /><!-- --></p>
 <p>What you’re seeing here is the distribution of the difference in P/82 compared to the true end of season total. A difference of 0 means no change in P/82 from that point in time to the end of year, a difference of -20 means a team’s P/82 pace is 20 less than what they ended with, and a difference of +20 means the pace is 20 more than what they finished with. The higher the blue curve is, the more teams are at that specific pace at that point in time. As you could expect, as the season progresses, the teams’ P/82 pace gets closer and closer to their final point total.</p>
 <p>Take notice of the red vertical lines; those signify the middle 90% of outcomes. So, if you look at the chart on game 41, the numbers corresponding to the intervals are -14 and 16. That means that by the mid-point of the season, 90% of teams did not finish more than 14 points above their current pace or 16 points below their current pace. That’s an unfortunately wide interval; with half of the games played there is still a 30 point wide range of outcomes.</p>
@@ -254,8 +255,8 @@ if (!doNotTrack) {
 <p>One way to use this information is to look at a team’s P/82 on a certain game number and compare their range of outcomes to what it would take to make playoffs. In the past five seasons, the last wildcard spot was earned with an average of 95 points. So, if a team’s lowest projected P/82 at any point in the season is more than 95, we’ll call them a lock for the post-season. On the other hand, if a team’s maximum projected P/82 is lower than 95 at any point, we’ll call them a lock for an early golf season. <strong>Once a team passes either limit, that is their predicted outcome regardless if they move back below/above it.</strong> We’ll make the minimum games played cutoff 12. This is inspired by Friedman’s Nov 1 rule, since November 1 usually corresponds to roughly the twelfth game of the season. Now let’s calculate how early we can confidently say teams are in or out of the playoffs.</p>
 <p>The chart below shows the limits when we can say a team has been eliminated or has clinched a playoff berth.</p>
 <p><img src="/post/how-late-is-too-late_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>The green line shows the P/82 pace at which a team is considered a lock for playoffs and the red shows the p/82 at which they are eliminated. For example, if a team is on pace for 116 points or more by game 20, pencil them in for playoffs. Conversely, if a team is on pace for less than 69 points by the twentieth game, playoffs are not in their future.</p>
-<p>Here is a table showing these limits on a game-by-game basis:</p>
+<p>The green line shows the P/82 pace at which a team is considered a lock for playoffs and the red shows the P/82 at which they are eliminated. For example, if a team is on pace for 116 points or more by game 20, pencil them in for playoffs. Conversely, if a team is on pace for less than 69 points by the twentieth game, playoffs are not in their future.</p>
+<p>Here is a table showing these limits for every five games into the season:</p>
 <table>
 <thead>
 <tr class="header">
@@ -271,49 +272,9 @@ if (!doNotTrack) {
 <td align="right">129</td>
 </tr>
 <tr class="even">
-<td align="right">11</td>
-<td align="right">66</td>
-<td align="right">127</td>
-</tr>
-<tr class="odd">
-<td align="right">12</td>
-<td align="right">66</td>
-<td align="right">125</td>
-</tr>
-<tr class="even">
-<td align="right">13</td>
-<td align="right">69</td>
-<td align="right">125</td>
-</tr>
-<tr class="odd">
-<td align="right">14</td>
-<td align="right">66</td>
-<td align="right">123</td>
-</tr>
-<tr class="even">
 <td align="right">15</td>
 <td align="right">70</td>
 <td align="right">126</td>
-</tr>
-<tr class="odd">
-<td align="right">16</td>
-<td align="right">66</td>
-<td align="right">127</td>
-</tr>
-<tr class="even">
-<td align="right">17</td>
-<td align="right">69</td>
-<td align="right">126</td>
-</tr>
-<tr class="odd">
-<td align="right">18</td>
-<td align="right">72</td>
-<td align="right">120</td>
-</tr>
-<tr class="even">
-<td align="right">19</td>
-<td align="right">70</td>
-<td align="right">121</td>
 </tr>
 <tr class="odd">
 <td align="right">20</td>
@@ -321,73 +282,13 @@ if (!doNotTrack) {
 <td align="right">118</td>
 </tr>
 <tr class="even">
-<td align="right">21</td>
-<td align="right">71</td>
-<td align="right">120</td>
-</tr>
-<tr class="odd">
-<td align="right">22</td>
-<td align="right">72</td>
-<td align="right">118</td>
-</tr>
-<tr class="even">
-<td align="right">23</td>
-<td align="right">76</td>
-<td align="right">117</td>
-</tr>
-<tr class="odd">
-<td align="right">24</td>
-<td align="right">76</td>
-<td align="right">115</td>
-</tr>
-<tr class="even">
 <td align="right">25</td>
 <td align="right">74</td>
 <td align="right">116</td>
 </tr>
 <tr class="odd">
-<td align="right">26</td>
-<td align="right">75</td>
-<td align="right">115</td>
-</tr>
-<tr class="even">
-<td align="right">27</td>
-<td align="right">77</td>
-<td align="right">115</td>
-</tr>
-<tr class="odd">
-<td align="right">28</td>
-<td align="right">76</td>
-<td align="right">114</td>
-</tr>
-<tr class="even">
-<td align="right">29</td>
-<td align="right">78</td>
-<td align="right">114</td>
-</tr>
-<tr class="odd">
 <td align="right">30</td>
 <td align="right">78</td>
-<td align="right">113</td>
-</tr>
-<tr class="even">
-<td align="right">31</td>
-<td align="right">79</td>
-<td align="right">113</td>
-</tr>
-<tr class="odd">
-<td align="right">32</td>
-<td align="right">80</td>
-<td align="right">113</td>
-</tr>
-<tr class="even">
-<td align="right">33</td>
-<td align="right">79</td>
-<td align="right">113</td>
-</tr>
-<tr class="odd">
-<td align="right">34</td>
-<td align="right">80</td>
 <td align="right">113</td>
 </tr>
 <tr class="even">
@@ -396,73 +297,13 @@ if (!doNotTrack) {
 <td align="right">112</td>
 </tr>
 <tr class="odd">
-<td align="right">36</td>
-<td align="right">79</td>
-<td align="right">111</td>
-</tr>
-<tr class="even">
-<td align="right">37</td>
-<td align="right">81</td>
-<td align="right">110</td>
-</tr>
-<tr class="odd">
-<td align="right">38</td>
-<td align="right">80</td>
-<td align="right">110</td>
-</tr>
-<tr class="even">
-<td align="right">39</td>
-<td align="right">81</td>
-<td align="right">110</td>
-</tr>
-<tr class="odd">
 <td align="right">40</td>
 <td align="right">80</td>
 <td align="right">110</td>
 </tr>
 <tr class="even">
-<td align="right">41</td>
-<td align="right">81</td>
-<td align="right">111</td>
-</tr>
-<tr class="odd">
-<td align="right">42</td>
-<td align="right">81</td>
-<td align="right">110</td>
-</tr>
-<tr class="even">
-<td align="right">43</td>
-<td align="right">81</td>
-<td align="right">108</td>
-</tr>
-<tr class="odd">
-<td align="right">44</td>
-<td align="right">82</td>
-<td align="right">108</td>
-</tr>
-<tr class="even">
 <td align="right">45</td>
 <td align="right">82</td>
-<td align="right">107</td>
-</tr>
-<tr class="odd">
-<td align="right">46</td>
-<td align="right">83</td>
-<td align="right">108</td>
-</tr>
-<tr class="even">
-<td align="right">47</td>
-<td align="right">83</td>
-<td align="right">107</td>
-</tr>
-<tr class="odd">
-<td align="right">48</td>
-<td align="right">83</td>
-<td align="right">107</td>
-</tr>
-<tr class="even">
-<td align="right">49</td>
-<td align="right">83</td>
 <td align="right">107</td>
 </tr>
 <tr class="odd">
@@ -471,48 +312,8 @@ if (!doNotTrack) {
 <td align="right">106</td>
 </tr>
 <tr class="even">
-<td align="right">51</td>
-<td align="right">84</td>
-<td align="right">106</td>
-</tr>
-<tr class="odd">
-<td align="right">52</td>
-<td align="right">84</td>
-<td align="right">106</td>
-</tr>
-<tr class="even">
-<td align="right">53</td>
-<td align="right">85</td>
-<td align="right">106</td>
-</tr>
-<tr class="odd">
-<td align="right">54</td>
-<td align="right">86</td>
-<td align="right">105</td>
-</tr>
-<tr class="even">
 <td align="right">55</td>
 <td align="right">86</td>
-<td align="right">104</td>
-</tr>
-<tr class="odd">
-<td align="right">56</td>
-<td align="right">87</td>
-<td align="right">105</td>
-</tr>
-<tr class="even">
-<td align="right">57</td>
-<td align="right">86</td>
-<td align="right">105</td>
-</tr>
-<tr class="odd">
-<td align="right">58</td>
-<td align="right">86</td>
-<td align="right">105</td>
-</tr>
-<tr class="even">
-<td align="right">59</td>
-<td align="right">87</td>
 <td align="right">104</td>
 </tr>
 <tr class="odd">
@@ -521,49 +322,9 @@ if (!doNotTrack) {
 <td align="right">103</td>
 </tr>
 <tr class="even">
-<td align="right">61</td>
-<td align="right">87</td>
-<td align="right">103</td>
-</tr>
-<tr class="odd">
-<td align="right">62</td>
-<td align="right">88</td>
-<td align="right">104</td>
-</tr>
-<tr class="even">
-<td align="right">63</td>
-<td align="right">88</td>
-<td align="right">103</td>
-</tr>
-<tr class="odd">
-<td align="right">64</td>
-<td align="right">88</td>
-<td align="right">102</td>
-</tr>
-<tr class="even">
 <td align="right">65</td>
 <td align="right">88</td>
 <td align="right">103</td>
-</tr>
-<tr class="odd">
-<td align="right">66</td>
-<td align="right">89</td>
-<td align="right">102</td>
-</tr>
-<tr class="even">
-<td align="right">67</td>
-<td align="right">89</td>
-<td align="right">102</td>
-</tr>
-<tr class="odd">
-<td align="right">68</td>
-<td align="right">89</td>
-<td align="right">102</td>
-</tr>
-<tr class="even">
-<td align="right">69</td>
-<td align="right">89</td>
-<td align="right">101</td>
 </tr>
 <tr class="odd">
 <td align="right">70</td>
@@ -571,71 +332,27 @@ if (!doNotTrack) {
 <td align="right">101</td>
 </tr>
 <tr class="even">
-<td align="right">71</td>
-<td align="right">90</td>
-<td align="right">101</td>
-</tr>
-<tr class="odd">
-<td align="right">72</td>
-<td align="right">89</td>
-<td align="right">100</td>
-</tr>
-<tr class="even">
-<td align="right">73</td>
-<td align="right">90</td>
-<td align="right">99</td>
-</tr>
-<tr class="odd">
-<td align="right">74</td>
-<td align="right">91</td>
-<td align="right">99</td>
-</tr>
-<tr class="even">
 <td align="right">75</td>
 <td align="right">91</td>
 <td align="right">99</td>
-</tr>
-<tr class="odd">
-<td align="right">76</td>
-<td align="right">92</td>
-<td align="right">99</td>
-</tr>
-<tr class="even">
-<td align="right">77</td>
-<td align="right">92</td>
-<td align="right">99</td>
-</tr>
-<tr class="odd">
-<td align="right">78</td>
-<td align="right">92</td>
-<td align="right">98</td>
-</tr>
-<tr class="even">
-<td align="right">79</td>
-<td align="right">92</td>
-<td align="right">98</td>
 </tr>
 <tr class="odd">
 <td align="right">80</td>
 <td align="right">93</td>
 <td align="right">97</td>
 </tr>
-<tr class="even">
-<td align="right">81</td>
-<td align="right">94</td>
-<td align="right">96</td>
-</tr>
 </tbody>
 </table>
 </div>
 <div id="case-studies" class="section level3">
 <h3>Case Studies</h3>
-<p>First, let’s see how the model fared in the 2018-19 season. Twelve teams managed to pass the ‘clinched’ threshold at some point in the season. Of those, 11 made playoffs. The one exception was Buffalo, who started the season on a tear but fell apart down the stretch. On the other end of the spectrum 18 teams fell below the ‘eliminated’ line during the season. Obviously that can’t be possible since only 15 teams <em>don’t</em> make playoffs. The three teams that made playoffs out of that group are Vegas, St. Louis, and Dallas. All three teams had their struggles but managed to turn it around. That leaves one team, Montreal, who never went above or below either line. They bounced around the middle all the way to the end, to the point where they were never deemed clinched or eliminated, even at game 81.</p>
+<p>First, let’s see how the model fared in the 2018-19 season. Twelve teams managed to pass the ‘clinched’ threshold at some point in the season. Of those, 11 made playoffs. The one exception was Buffalo, who started the season on a tear but fell apart down the stretch. On the other end of the spectrum 18 teams fell below the ‘eliminated’ line during the season. Obviously that can’t be possible since only 15 teams <em>don’t</em> make playoffs. The five teams that made playoffs out of that group are Vegas, St. Louis, Carolina, Colorado, and Dallas. All five teams had their various struggles but managed to turn it around. That leaves one team, Montreal, who never went above or below either line. They bounced around the middle all the way to the end, to the point where they were never deemed clinched or eliminated, even at game 81. Here’s how each team’s season looks:</p>
+<p><img src="/post/how-late-is-too-late_files/figure-html/unnamed-chunk-4-1.gif" /><!-- --></p>
 <blockquote>
-<p><strong>All 2018-19 team results are at the end of article</strong></p>
+<p><strong>All 2018-19 team results are at the end of the article</strong></p>
 </blockquote>
 <p>But that’s only one season. Expanding it to include all five years of our sample yields the following:</p>
-<p>Of the 80 teams that made the playoffs, the model successfully predicted 60 of them. Of the 72 teams that did not make playoffs, the model predicted 64. There were 10 team that the model did not feel strongly enough about to predict one way or the other, so we’ll ignore those for 10 teams for now.</p>
+<p>Of the 80 teams that made the playoffs, the model successfully predicted 60 of them. Of the 72 teams that did not make playoffs, the model predicted 64. There were 10 team that the model did not feel strongly enough about to predict one way or the other, so we’ll ignore those 10 teams for now.</p>
 </div>
 <div id="strengths" class="section level3">
 <h3>Strengths</h3>
@@ -655,16 +372,10 @@ if (!doNotTrack) {
 </div>
 <div id="takeaways" class="section level3">
 <h3>Takeaways</h3>
-<p>This model is not perfect, but one area it excels is in deciding when teams are safely in the playoffs. Only 5.88% of the teams it thought would make playoffs failed to do so. On the other hand, it is a little quick to label teams as ‘eliminated.’ Slightly less than 1 in 5 teams it thought were out, ended up being in. Efforts will be made in the future to improve upon these results, and I am open to any suggestions.</p>
-<hr />
-<div id="previous-why-goalies-are-voodoo" class="section level4">
-<h4><em>Previous: <a href="https://iceanalysis.com/goalies-voodoo/">Why Goalies are ‘Voodoo’</a></em></h4>
-<hr />
-<p>Like what you read? Considering <a href="https://iceanalysis.com/subscribe">subscribing</a> to get notified of future posts.</p>
+<p>This model is not perfect, but one area it excels in is deciding when teams are safely in the playoffs. Only 5.88% of the teams it thought would make playoffs failed to do so. On the other hand, it is a little quick to label teams as ‘eliminated.’ Slightly less than 1 in 5 teams it thought were out, ended up being in. Efforts will be made in the future to improve upon these results, and I am open to any suggestions.</p>
 </div>
-</div>
-<div id="team-by-team-results" class="section level2">
-<h2>2018-19 Team-by-Team Results</h2>
+<div id="team-by-team-results" class="section level3">
+<h3>2018-19 Team-by-Team Results</h3>
 <p><a href="/img/2018-19-ANA.png">ANA</a>
 <a href="/img/2018-19-ARI.png">ARI</a>
 <a href="/img/2018-19-BOS.png">BOS</a>
@@ -695,6 +406,12 @@ if (!doNotTrack) {
 <a href="/img/2018-19-VEG.png">VEG</a>
 <a href="/img/2018-19-WPG.png">WPG</a>
 <a href="/img/2018-19-WSH.png">WSH</a></p>
+<hr />
+<div id="previous-why-goalies-are-voodoo" class="section level4">
+<h4><em>Previous: <a href="https://iceanalysis.com/goalies-voodoo/">Why Goalies are ‘Voodoo’</a></em></h4>
+<hr />
+<p>Like what you read? Considering <a href="https://iceanalysis.com/subscribe">subscribing</a> to get notified of future posts.</p>
+</div>
 </div>
 
             </article>
@@ -907,7 +624,7 @@ title="github icon"></i>
   </div>
   <script src="/js/jquery.min.js"></script>
 <script src="/js/jquerymigrate.js"></script>
-<script src="/js/production.min.js?v=1566265291"></script>
+<script src="/js/production.min.js?v=1566355878"></script>
 
 </body>
 </html>
