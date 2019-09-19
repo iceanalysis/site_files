@@ -243,9 +243,10 @@ density_df %>%
     annotate("text", x = 20, y = 130, label = "Clinched Line", color = "darkgreen", family = "Consolas") +
     annotate("text", x = 25, y = 62, label = "Eliminated Line", color = "darkred", family = "Consolas") +
     annotate("text", x= 20, y = 97, label = "95 point cut-off", color = "gray40", family = "Consolas")+
-  geom_line(data = sd_df, aes(x = GP, y = safe), color = "darkgreen", size = 2) +
-  geom_line(data = sd_df, aes(x = GP, y = out), color = "darkred", size = 2) +
+  geom_line(data = sd_df, aes(x = GP, y = safe), color = "green", size = 2) +
+  geom_line(data = sd_df, aes(x = GP, y = out), color = "red", size = 2) +
   theme_ice +
+    my_labs +
     labs(title = paste0("2018-19 Results ", i)) +
     ggsave(path = here::here("static/img/"), filename = paste0("2018-19-", i, ".png"))
 
@@ -256,10 +257,12 @@ joined_df <- left_join(density_df, sd_df) %>%
   mutate(col = ifelse(p_82 >= safe, "Clinched",
                       ifelse(p_82 <= out, "Eliminated", NA))) %>%
   group_by(team, year) %>%
-  fill(col, .direction = "down")
+  fill(col, .direction = "down") %>%
+  mutate(col2 = ifelse(!is.na(lag(col)), lag(col2), NA))
   
-  View(joined_df %>%
-         filter(team == "BUF",
+  
+View(joined_df %>%
+         filter(team == "CAR",
                 year == 2019))
   
 density_df
@@ -280,7 +283,7 @@ joined_df %>%
   my_labs +
   theme_ice
 
-View(joined_df %>% filter(year == 2015,
+View(joined_df %>% filter(year == 2019,
                           !is.na(col)) %>%
        group_by(team) %>%
        filter(GP == min(GP)) %>%

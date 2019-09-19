@@ -1,0 +1,352 @@
+---
+title: Shooting Location Tendencies 
+author: IceAnalysis
+date: '2019-09-13'
+slug: shooting-location-tendencies
+image: img/ovechkin.jpg
+tags: [NHL]
+---
+
+
+
+
+```{r setup, include=FALSE, echo = F, warning=F, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rvest)
+library(beepr)
+library(gganimate)
+library(extrafont)
+library(knitr)
+library(here)
+library(data.table)
+
+
+
+
+theme_ice <- theme_bw() +
+  theme(
+    text = element_text(family = "Consolas"),
+    plot.title = element_text(hjust = .5),
+    plot.subtitle = element_text(hjust = .5),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom")
+
+my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
+
+
+here()
+shots <- fread(here("/data/shots_2007-2018.csv"))
+shots <- data.frame(shots)
+
+
+
+df <- shots %>%
+  filter(season > 2016,
+         yCordAdjusted != 0,
+         playerPositionThatDidEvent %in% c("L", "R", "C", "D"),
+         homeSkatersOnIce == 5,
+         awaySkatersOnIce == 5) %>%
+  select(shooterName,
+         playerPositionThatDidEvent,
+         teamCode,
+         season,
+         yCordAdjusted,
+         xCordAdjusted) %>%
+  mutate(dist = ifelse(yCordAdjusted < 0, -100 - (xCordAdjusted*-1), 100 - xCordAdjusted),
+         pos = ifelse(playerPositionThatDidEvent == "D", "D", "F")) %>%
+  group_by(shooterName) %>%
+  mutate(events = n())
+
+
+
+
+team_df <- df %>% 
+  group_by(shooterName) %>%
+  mutate(left_events = sum(dist >0),
+         right_events = sum(dist <0),
+         left_prop = left_events / events,
+         right_prop = right_events / events) %>%
+  ungroup() 
+
+
+
+
+
+```
+
+
+*Which players shoot from mostly one side of the ice?*
+<!--more-->
+*Photo: Patrick Smith/Getty Images*
+
+It's a tie game in the third period and your favorite team is playing against the Washington Capitals. Your least favorite player on your team takes a lazy tripping penalty and your team is now shorthanded at the worst time. As the Caps pass around the offensive zone, you, along with every other person watching the game, are thinking to yourself, "stay close to Ovechkin, don't let him shoot a one-timer from the top of the circle." You already know how this ends. One of the most prolific goal scorers in NHL history cannot be stopped, ripping one past your goalie from his patented spot.  
+Ovechkin has made a career out of firing bombs from the right faceoff circle on the powerplay.  This seemingly easy-to-defend play has proved impossible to stop over more than a decade. While the Ovechkin power-play shot is well known, are there any other players that have shooting location preferences? Inspired by [this Instagram post,](https://www.instagram.com/p/B1WHppzhuwm/) we're going to dive in to find out which players prefer shooting from one side of the ice.
+
+Thankfully, [MoneyPuck](https://moneypuck.com) has graciously released a trove of data containing information on every unblocked shot attempt in the NHL going back to 2007-08. This includes a ton of valuable context surrounding each shot, but the only two things we need here are the (X,Y) coordinates of the shot, and who shot it. From this we can calculate the percentage of shots every player took from either side of the ice. To keep the analysis more up to date, let's look at only the shots taken in the last three seasons. Also, to avoid special teams tendencies from obscuring the picture we'll only focus on 5v5 shots.
+
+### Great!... Wait
+
+Let's start out by finding the 12 skaters who shoot from the left side of the ice most frequently.
+
+
+
+
+
+
+```{r, cache = T, echo = F, warning=F, message=F}
+
+
+top_12_left <- team_df %>%
+  filter(#pos == "F",
+         events >= 100) %>%
+  group_by(shooterName) %>%
+  summarize(left_events = mean(left_prop)) %>%
+  top_n(12)
+
+
+ggplot() +
+  geom_histogram(data = subset(team_df, dist > 0 & shooterName %in% top_12_left$shooterName), aes(x = dist - 11, y = -..count..), fill = "orange", binwidth = 2) +
+  geom_histogram(data = subset(team_df, dist < 0 & shooterName %in% top_12_left$shooterName), aes(x = -dist - 11, y = ..count..), fill = "purple", binwidth = 2) +
+ # geom_text(data = subset(team_df, dist > 0 & shooterName %in% top_12_left$shooterName), aes(x = 75, y = 10, label = paste0(round(100*right_prop),"%")), family = "Consolas") +
+  geom_text(data = subset(team_df, dist < 0 & shooterName %in% top_12_left$shooterName), aes(x = 75, y = -10, label = paste0(round(100*left_prop),"%")), family = "Consolas") +
+  coord_flip() +
+  facet_wrap(~shooterName) +
+  theme_ice +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_hline(yintercept = 0) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_text(hjust = .5),
+        plot.subtitle = element_text(hjust = .5)) +
+  labs(title = "2016-2018 Even Strength Shots",
+       subtitle = "12 skaters who shoot from the left most often (min 100 shots)",
+       y = " <- Number of Left Shots | Number of Right Shots ->",
+       x = "Distance from Goal") +
+  my_labs
+
+
+```
+
+
+Wow, look at how often... wait, they're all *defensemen!* Well, this is actually in line with what one would expect. In the offensive zone, forwards move around a lot and generally don't have designated spots on the ice they are responsible for. On the other hand, defensemen mostly 1) remain on the blue line  and 2) keep to their respective side of the ice. Both of those truths are evident in the chart as we see these D-men taking shots from almost entirely one side of the ice with most of them come from 50+ feet from the goal. Knowing these facts, let's restrict our search to forwards only.
+
+
+### This Looks Better
+
+Here are the top 12 forwards from the 2016-2018 seasons who took the highest percentage of their shots from the left side of the ice:
+
+
+
+
+
+
+```{r, echo = F, warning=F, message=F}
+
+top_12_left <- team_df %>%
+  filter(pos == "F",
+         events >= 100) %>%
+  group_by(shooterName) %>%
+  summarize(left_events = mean(left_prop)) %>%
+  top_n(12)
+
+
+
+ggplot() +
+  geom_histogram(data = subset(team_df, dist > 0 & shooterName %in% top_12_left$shooterName), aes(x = dist - 11, y = -..count..), fill = "orange", binwidth = 2) +
+  geom_histogram(data = subset(team_df, dist < 0 & shooterName %in% top_12_left$shooterName), aes(x = -dist - 11, y = ..count..), fill = "purple", binwidth = 2) +
+ # geom_text(data = subset(team_df, dist > 0 & shooterName %in% top_12_left$shooterName), aes(x = 75, y = 10, label = paste0(round(100*right_prop),"%")), family = "Consolas") +
+  geom_text(data = subset(team_df, dist < 0 & shooterName %in% top_12_left$shooterName), aes(x = 75, y = -10, label = paste0(round(100*left_prop),"%")), family = "Consolas") +
+  coord_flip() +
+  facet_wrap(~shooterName) +
+  theme_ice +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_hline(yintercept = 0) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_text(hjust = .5),
+        plot.subtitle = element_text(hjust = .5)) +
+  labs(title = "2016-2018 Even Strength Shots",
+       subtitle = "12 forwards who shoot from the left most often (min 100 shots)",
+       y = " <- Number of Left Shots | Number of Right Shots ->",
+       x = "Distance from Goal") +
+  my_labs
+
+
+
+
+
+```
+
+
+And the right side:
+
+
+
+```{r, echo = F, warning=F, message=F}
+
+
+top_12_right <- team_df %>%
+  filter(pos == "F",
+         events >= 100) %>%
+  group_by(shooterName) %>%
+  summarize(right_events = mean(right_prop)) %>%
+  top_n(12) %>%
+  arrange(desc(right_events))
+
+
+
+
+ggplot() +
+  geom_histogram(data = subset(team_df, dist > 0 & shooterName %in% top_12_right$shooterName), aes(x = dist - 11, y = -..count..), fill = "orange", binwidth = 2) +
+  geom_histogram(data = subset(team_df, dist < 0 & shooterName %in% top_12_right$shooterName), aes(x = -dist - 11, y = ..count..), fill = "purple", binwidth = 2) +
+  geom_text(data = subset(team_df, dist > 0 & shooterName %in% top_12_right$shooterName), aes(x = 75, y = 10, label = paste0(round(100*right_prop),"%")), family = "Consolas") +
+#  geom_text(data = subset(team_df, dist < 0 & shooterName %in% top_12_right$shooterName), aes(x = 75, y = -10, label = paste0(round(100*left_prop),"%")), family = "Consolas") +
+  coord_flip() +
+  facet_wrap(~shooterName) +
+  theme_ice +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_hline(yintercept = 0) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_text(hjust = .5),
+        plot.subtitle = element_text(hjust = .5)) +
+  labs(title = "2016-2018 Even Strength Shots",
+       subtitle = "12 forwards who shoot from the right most often (min 100 shots)",
+       y = " <- Number of Left Shots | Number of Right Shots ->",
+       x = "Distance from Goal") +
+  my_labs
+
+```
+
+
+
+
+Out of all forwards, Luke Kunin has the highest percentage of shots coming from one side. A whopping 72% of his shots come from the right side of the ice. One thing I find interesting in these charts is how distribution of shot distance varies between the players. For example, on the left-side shot chart, Artemi Panarin and Oskar Lindblom have similar percentages. However, Lindblom's game resembles more of a power-forward; he is always grinding near the net and majority of his shots come from very close to the goal. Conversely, Panarin is known for his wicked shot and is a threat to score at distance. We see that his most frequent shot distance is around 25 feet and he has relatively fewer shots closer to the goal. 
+
+
+### A Chart for Everyone
+
+If you didn't see your favorite team/player above, fear not. Here are the 12 forwards and 6 defensemen for each team who attempted the most shots over the last three years.
+
+
+
+
+
+
+
+```{r, echo = F, warning=F, message=F}
+
+
+teams <- sort(unique(df$teamCode))
+
+
+
+for (i in teams) {
+  
+  
+  team_df <- df %>% 
+  filter(teamCode == i) %>%
+  group_by(shooterName, teamCode) %>%
+  mutate(left_events = sum(dist >0),
+         right_events = sum(dist <0),
+         left_prop = left_events / (left_events + right_events),
+         right_prop = right_events / (left_events + right_events),
+         tot_events = left_events + right_events) %>%
+  ungroup() 
+
+top_6D <- team_df %>%
+  filter(pos == "D") %>%
+  group_by(shooterName) %>%
+  summarize(events = mean(tot_events)) %>%
+  top_n(6) %>%
+  arrange(desc(events))
+
+top_12F <- team_df %>%
+  filter(pos == "F") %>%
+  group_by(shooterName) %>%
+  summarize(events = mean(tot_events)) %>%
+  top_n(12) %>%
+  arrange(desc(events))
+
+
+fchart <- ggplot() +
+  geom_histogram(data = subset(team_df, dist > 0 & shooterName %in% top_12F$shooterName), aes(x = dist - 11, y = -..count..), fill = "orange", binwidth = 2) +
+  geom_histogram(data = subset(team_df, dist < 0 & shooterName %in% top_12F$shooterName), aes(x = -dist - 11, y = ..count..), fill = "purple", binwidth = 2) +
+  geom_text(data = subset(team_df, dist > 0 & shooterName %in% top_12F$shooterName), aes(x = 75, y = 10, label = ifelse(right_prop >= .5, paste0(round(100*right_prop),"%"), NA)), family = "Consolas") +
+  geom_text(data = subset(team_df, dist < 0 & shooterName %in% top_12F$shooterName), aes(x = 75, y = -10, label = ifelse(left_prop > .5, paste0(round(100*left_prop),"%"), NA)), family = "Consolas") +
+  coord_flip() +
+  facet_wrap(~shooterName) +
+  theme_ice +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_hline(yintercept = 0) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_text(hjust = .5),
+        plot.subtitle = element_text(hjust = .5)) +
+  labs(title = paste0(i, " 2016-2018 Even Strength Shots"),
+       subtitle = "Forwards",
+       y = " <- Number of Left Shots | Number of Right Shots ->",
+       x = "Distance from Goal") +
+  my_labs +
+  ggsave(path = here::here("static/img/pref/"), filename = paste0("F-Side-Pref-", i, ".png"), height = 9, units = "in")
+
+dchart <- ggplot() +
+  geom_histogram(data = subset(team_df, dist > 0 & shooterName %in% top_6D$shooterName), aes(x = dist - 11, y = -..count..), fill = "orange", binwidth = 2) +
+  geom_histogram(data = subset(team_df, dist < 0 & shooterName %in% top_6D$shooterName), aes(x = -dist - 11, y = ..count..), fill = "purple", binwidth = 2) +
+  geom_text(data = subset(team_df, dist > 0 & shooterName %in% top_6D$shooterName), aes(x = 75, y = 10, label = ifelse(right_prop >= .5, paste0(round(100*right_prop),"%"), NA)), family = "Consolas") +
+  geom_text(data = subset(team_df, dist < 0 & shooterName %in% top_6D$shooterName), aes(x = 75, y = -10, label = ifelse(left_prop > .5, paste0(round(100*left_prop),"%"), NA)), family = "Consolas") +
+  coord_flip() +
+  facet_wrap(~shooterName) +
+  theme_ice +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_hline(yintercept = 0) +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_text(hjust = .5),
+        plot.subtitle = element_text(hjust = .5)) +
+  labs(title = paste0(i, " 2016-2018 Even Strength Shots"),
+       subtitle = "Defensemen",
+       y = "<- Number of Left Shots | Number of Right Shots ->",
+       x = "Distance from Goal") +
+  my_labs +
+  ggsave(path = here::here("static/img/pref/"), filename = paste0("D-Side-Pref-", i, ".png"), height = 6, units = "in")
+
+print(fchart)
+print(dchart)
+
+
+}
+
+
+
+
+
+```
+
+
+
+---
+
+#### *Previous: [Modeling Playoff Chances](https://iceanalysis.com/playoff-chances/)*
+
+---
+Like what you read? Considering [subscribing](https://iceanalysis.com/subscribe) to get notified of future posts.
+
+

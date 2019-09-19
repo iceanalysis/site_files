@@ -230,10 +230,10 @@ teams <- density_df %>%
   my_labs +
   transition_states(team,
                     state_length = 3) +
-  ease_aes("linear")
+  ease_aes("cubic-in-out")
 
-animate(teams, duration = 90)
-
+animate(teams, fps = 1, duration = 31) %>% anim_save(animation = last_animation(), filename = "teams.gif")
+?anim_save()
 ```
 
 
