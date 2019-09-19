@@ -233,7 +233,6 @@ teams <- density_df %>%
   ease_aes("cubic-in-out")
 
 animate(teams, fps = 1, duration = 31) %>% anim_save(animation = last_animation(), filename = "teams.gif")
-?anim_save()
 ```
 
 

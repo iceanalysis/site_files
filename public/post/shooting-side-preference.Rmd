@@ -36,30 +36,31 @@ theme_ice <- theme_bw() +
 my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
 
 
-here()
-shots <- fread(here("/data/shots_2007-2018.csv"))
-shots <- data.frame(shots)
+# here()
+# shots <- fread(here("/data/shots_2007-2018.csv"))
+# shots <- data.frame(shots)
 
 
+# 
+# df <- shots %>%
+#   filter(season > 2016,
+#          yCordAdjusted != 0,
+#          playerPositionThatDidEvent %in% c("L", "R", "C", "D"),
+#          homeSkatersOnIce == 5,
+#          awaySkatersOnIce == 5) %>%
+#   select(shooterName,
+#          playerPositionThatDidEvent,
+#          teamCode,
+#          season,
+#          yCordAdjusted,
+#          xCordAdjusted) %>%
+#   mutate(dist = ifelse(yCordAdjusted < 0, -100 - (xCordAdjusted*-1), 100 - xCordAdjusted),
+#          pos = ifelse(playerPositionThatDidEvent == "D", "D", "F")) %>%
+#   group_by(shooterName) %>%
+#   mutate(events = n())
 
-df <- shots %>%
-  filter(season > 2016,
-         yCordAdjusted != 0,
-         playerPositionThatDidEvent %in% c("L", "R", "C", "D"),
-         homeSkatersOnIce == 5,
-         awaySkatersOnIce == 5) %>%
-  select(shooterName,
-         playerPositionThatDidEvent,
-         teamCode,
-         season,
-         yCordAdjusted,
-         xCordAdjusted) %>%
-  mutate(dist = ifelse(yCordAdjusted < 0, -100 - (xCordAdjusted*-1), 100 - xCordAdjusted),
-         pos = ifelse(playerPositionThatDidEvent == "D", "D", "F")) %>%
-  group_by(shooterName) %>%
-  mutate(events = n())
 
-
+load(here("/data/shots_1618.RData"))
 
 
 team_df <- df %>% 
@@ -84,7 +85,7 @@ team_df <- df %>%
 It's a tie game in the third period and your favorite team is playing against the Washington Capitals. Your least favorite player on your team takes a lazy tripping penalty and your team is now shorthanded at the worst time. As the Caps pass around the offensive zone, you, along with every other person watching the game, are thinking to yourself, "stay close to Ovechkin, don't let him shoot a one-timer from the top of the circle." You already know how this ends. One of the most prolific goal scorers in NHL history cannot be stopped, ripping one past your goalie from his patented spot.  
 Ovechkin has made a career out of firing bombs from the right faceoff circle on the powerplay.  This seemingly easy-to-defend play has proved impossible to stop over more than a decade. While the Ovechkin power-play shot is well known, are there any other players that have shooting location preferences? Inspired by [this Instagram post,](https://www.instagram.com/p/B1WHppzhuwm/) we're going to dive in to find out which players prefer shooting from one side of the ice.
 
-Thankfully, [MoneyPuck](https://moneypuck.com) has graciously released a trove of data containing information on every unblocked shot attempt in the NHL going back to 2007-08. This includes a ton of valuable context surrounding each shot, but the only two things we need here are the (X,Y) coordinates of the shot, and who shot it. From this we can calculate the percentage of shots every player took from either side of the ice. To keep the analysis more up to date, let's look at only the shots taken in the last three seasons. Also, to avoid special teams tendencies from obscuring the picture we'll only focus on 5v5 shots.
+Thankfully, **MoneyPuck** has graciously released a trove of data containing information on every unblocked shot attempt in the NHL going back to 2007-08. This includes a ton of valuable context surrounding each shot, but the only two things we need here are the (X,Y) coordinates of the shot, and who shot it. From this we can calculate the percentage of shots every player took from either side of the ice. To keep the analysis more up to date, let's look at only the shots taken in the last three seasons. Also, to avoid special teams tendencies from obscuring the picture we'll only focus on 5v5 shots.
 
 ### Great!... Wait
 
