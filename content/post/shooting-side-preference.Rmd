@@ -60,7 +60,7 @@ my_labs  = list(labs(caption = "IceAnalysis.com | @IceAnalysis"))
 #   mutate(events = n())
 
 
-load(here("/data/shots_1618.RData"))
+load(here("shots_1618.RData"))
 
 
 team_df <- df %>% 
