@@ -64,8 +64,6 @@ for(j in 2018:2019) {
 }  ; beep()
 df1819 <- data.frame(data.table::rbindlist(year_list1819))
 
-View(df1819)
-
 
 
 
@@ -84,6 +82,7 @@ teams1517 <- c("ANA",
                "CHI",
                "COL",
                "DAL",
+               "DET",
                "EDM",
                "FLA",
                "LAK",
@@ -119,8 +118,10 @@ for(j in 2015:2017) {
 }  ; beep()
 df1517 <- data.frame(data.table::rbindlist(year_list1517, fill = T))
 
-View(df1517)
+
 df_all <- rbind(df1517, df1819)
+save(df_all, file = "content/post/df_all.Rda")
+
 
 df <- subset(df_all, GP != "GP") %>%
   select(team, year, GP, Date, W, L, OL,) %>%
